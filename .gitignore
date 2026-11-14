@@ -45,3 +45,4 @@ Thumbs.db
 # Secrets & local credentials
 secrets.h
 .env
+
