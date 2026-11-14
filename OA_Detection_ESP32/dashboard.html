@@ -1,0 +1,3978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARTHROGUARD</title>
+  <style>
+    /* ==================== Soothing Clinical Theme ==================== */
+    :root {
+      --bg-page: #f5f5f7;
+  --bg-body: #f5f5f7;
+      --bg-surface: #ffffff;
+      --bg-soft: #f7faf9;
+      --bg-hover: #edf4f2;
+      --bg-stage: linear-gradient(180deg, #f8fbfa 0%, #eaf2ef 100%);
+      --bg-modal: rgba(30, 41, 59, 0.38);
+      --border: #dce6e3;
+      --shadow: 0 4px 18px rgba(15, 45, 40, 0.06);
+
+      --text-main: #1e2d2f;
+      --text-sub: #4b6163;
+      --text-muted: #768b8d;
+
+      --teal: #0d9488;
+      --teal-soft: #e6f6f4;
+      --blue: #3b82f6;
+      --blue-soft: #eff6ff;
+      --indigo: #6366f1;
+      --green: #10b981;
+      --green-soft: #ecfdf5;
+      --amber: #d97706;
+      --amber-soft: #fffbeb;
+      --rose: #e11d48;
+      --rose-soft: #fff1f2;
+
+      --radius: 16px;
+      --transition: all 0.22s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+
+    /* ==================== Top Navigation ==================== */
+    .topbar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .brand-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text-sub);
+    }
+
+    .pill-ok {
+      background: var(--green-soft);
+      color: #047857;
+      border-color: #a7f3d0;
+    }
+
+    .pill-warn {
+      background: var(--amber-soft);
+      color: #b45309;
+      border-color: #fde68a;
+    }
+
+    .pill-err {
+      background: var(--rose-soft);
+      color: #be123c;
+      border-color: #fecdd3;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* ==================== Controls Bar (Clean Single Strip) ==================== */
+    .control-strip {
+      max-width: 1420px;
+      margin: 14px auto 0;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 8px rgba(15, 45, 40, 0.03);
+    }
+
+    .control-group label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    input,
+    select,
+    textarea {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      color: var(--text-main);
+      font-size: 12px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--teal);
+      background: #fff;
+    }
+
+    .btn {
+      padding: 6px 13px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-teal {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .btn-teal:hover:not(:disabled) {
+      background: #0f766e;
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .btn-blue:hover:not(:disabled) {
+      background: #2563eb;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .btn-green:hover:not(:disabled) {
+      background: #059669;
+    }
+
+    .btn-rose {
+      background: var(--rose);
+      color: #fff;
+    }
+
+    .btn-rose:not(:disabled) {
+      background: #be123c;
+    }
+
+    .btn-amber {
+      background: #f59e0b;
+      color: #fff;
+    }
+
+    .btn-amber:hover:not(:disabled) {
+      background: #d97706;
+    }
+
+    .btn-soft {
+      background: var(--bg-soft);
+      color: var(--text-sub);
+      border-color: var(--border);
+    }
+
+    .btn-soft:hover:not(:disabled) {
+      background: var(--bg-hover);
+      color: var(--text-main);
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: 11px;
+    }
+
+    /* ==================== Main Container ==================== */
+    .container {
+      max-width: 1420px;
+      margin: 14px auto 28px;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .card-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ==================== Slim Status Banner ==================== */
+    .status-bar {
+      border-radius: 14px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .status-bar.normal {
+      background: var(--green-soft);
+      border-color: #a7f3d0;
+    }
+
+    .status-bar.abnormal {
+      background: var(--rose-soft);
+      border-color: #fecdd3;
+    }
+
+    .status-bar.critical {
+      background: #ffe4e6;
+      border: 1.8px solid #e11d48;
+      box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.14);
+    }
+
+    .status-bar.initializing {
+      background: var(--bg-soft);
+      border-color: var(--border);
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-emoji {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .status-bar.normal h2 {
+      font-size: 16px;
+      color: #065f46;
+    }
+
+    .status-bar.abnormal h2 {
+      font-size: 16px;
+      color: #9f1239;
+    }
+
+    .status-bar.critical h2 {
+      font-size: 16px;
+      color: #9f1239;
+      font-weight: 800;
+    }
+
+    .status-bar.initializing h2 {
+      font-size: 16px;
+      color: #0f766e;
+    }
+
+    .status-sub {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .hw-leds {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .led-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-sub);
+    }
+
+    .led-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1.5px solid #cbd5e1;
+      background: #e2e8f0;
+    }
+
+    .led-dot.green {
+      background: #10b981;
+      border-color: #059669;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.55);
+    }
+
+    .led-dot.green-blink {
+      background: #10b981;
+      border-color: #059669;
+      animation: greenBlink 1s infinite ease-in-out;
+    }
+
+    .led-dot.red {
+      background: #e11d48;
+      border-color: #be123c;
+      box-shadow: 0 0 8px rgba(225, 29, 72, 0.55);
+    }
+
+    @keyframes greenBlink {
+
+      0%,
+      100% {
+        background: #10b981;
+        box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+      }
+
+      50% {
+        background: #e2e8f0;
+        box-shadow: none;
+      }
+    }
+
+    /* ==================== Hero Grid (Leg Sim + Risk Meter) ==================== */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    /* Full-Leg Simulation Stage */
+    .sim-stage {
+      background: var(--bg-stage);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sensor-pills-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .mini-sensor {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 9px;
+    }
+
+    .mini-sensor-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .mini-sensor-val {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Risk Meter Card */
+    .risk-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .risk-svg {
+      width: 250px;
+      height: 142px;
+      overflow: visible;
+    }
+
+    .risk-needle {
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transform-origin: 125px 118px;
+    }
+
+    .risk-num {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1;
+      margin-top: -8px;
+    }
+
+    .tier-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .tier-Pending {
+      background: #f1f5f9;
+      color: var(--text-sub);
+    }
+
+    .tier-Low {
+      background: var(--green-soft);
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .tier-Moderate {
+      background: var(--amber-soft);
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .tier-High {
+      background: var(--rose-soft);
+      color: #be123c;
+      border: 1px solid #fecdd3;
+    }
+
+    .essential-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .essential-tile {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .essential-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .essential-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .essential-sub {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .risk-bars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .rb-box {
+      font-size: 11px;
+    }
+
+    .rb-head {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-sub);
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+
+    .rb-track {
+      height: 6px;
+      background: #e7eeec;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .rb-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .markers-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .marker-chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: #0f766e;
+      font-weight: 500;
+    }
+
+    .marker-chip.warn {
+      background: var(--rose-soft);
+      color: #be123c;
+    }
+
+    /* ==================== Second Row: Exercises + Live Trend ==================== */
+    .mid-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 16px;
+    }
+
+    .ex-cue {
+      background: var(--teal-soft);
+      border-left: 4px solid var(--teal);
+      border-radius: 10px;
+      padding: 11px 14px;
+      margin: 10px 0;
+    }
+
+    .ex-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .ex-stat {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .ex-stat-lbl {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .ex-stat-val {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    .chart-wrap {
+      height: 220px;
+      position: relative;
+    }
+
+    /* ==================== Tabbed Bottom Details Card ==================== */
+    .tabs {
+      display: flex;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-sub);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--teal-soft);
+      color: #0f766e;
+      border-color: #99f6e4;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    .scroll-list {
+      max-height: 185px;
+      overflow-y: auto;
+    }
+
+    .list-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-bottom: 1px solid #eef3f1;
+      font-size: 12px;
+      gap: 10px;
+    }
+
+    .imu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .imu-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .imu-table th,
+    .imu-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #eef3f1;
+    }
+
+    .imu-table th {
+      text-align: left;
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .imu-table td {
+      text-align: right;
+      font-family: monospace;
+      color: var(--text-main);
+    }
+
+    /* ==================== Modals & Toasts ==================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-modal);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      width: 92%;
+      max-width: 720px;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(15, 45, 40, 0.16);
+    }
+
+    .modal h2 {
+      font-size: 18px;
+      margin-bottom: 14px;
+      color: var(--text-main);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+    }
+
+    .modal-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      background: var(--bg-soft);
+    }
+
+    .modal-item:hover {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+    }
+
+    .modal-item.active {
+      border-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .toast-wrap {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 360px;
+    }
+
+    .toast {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 12px;
+      box-shadow: 0 8px 24px rgba(15, 45, 40, 0.12);
+    }
+
+    .toast.ok {
+      border-left-color: var(--green);
+    }
+
+    .toast.warn {
+      border-left-color: var(--amber);
+    }
+
+    .toast.err {
+      border-left-color: var(--rose);
+    }
+
+    .seg-toggle {
+      display: inline-flex;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .seg-toggle button {
+      border: none;
+      background: transparent;
+      color: var(--text-sub);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .seg-toggle button.active {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    .sensor-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 5px;
+      background: var(--text-muted);
+      vertical-align: middle;
+    }
+
+    .sensor-dot.ok {
+      background: var(--green);
+    }
+
+    .sensor-dot.warn {
+      background: var(--amber);
+    }
+
+    .sensor-dot.fault {
+      background: var(--rose);
+    }
+
+    .mini-sensor.warn {
+      border-color: #fde68a;
+      background: var(--amber-soft);
+    }
+
+    .mini-sensor.fault {
+      border-color: #fecdd3;
+      background: var(--rose-soft);
+    }
+
+    .sensor-fault-banner {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 7px 11px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--amber-soft);
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+
+    .sensor-fault-banner.fault {
+      background: var(--rose-soft);
+      border-color: #fecdd3;
+      color: #9f1239;
+    }
+
+    .analytics-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .an-tab {
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text-sub);
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .an-tab.active {
+      background: var(--teal);
+      color: #fff;
+      border-color: var(--teal);
+    }
+
+    .an-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .an-box {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .an-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .an-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    .bilateral-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .an-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .an-table th,
+    .an-table td {
+      padding: 7px 9px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .an-table th {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--bg-soft);
+    }
+
+    .cal-sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .cal-sensor-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 10px 12px;
+    }
+
+    .cal-sensor-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .cal-sensor-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .cal-raw-tag {
+      font-family: monospace;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--teal-soft);
+      color: #0f766e;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+
+    .cal-mini-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .cal-mini-row label {
+      display: block;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+
+    .cal-mini-row input,
+    .cal-mini-row select {
+      padding: 5px 6px;
+      font-size: 11px;
+    }
+
+    .sim-foot-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 16px;
+    }
+
+    .stim-layout {
+      display: grid;
+      grid-template-columns: 205px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .stim-stage {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .stim-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .stim-field label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 2px;
+    }
+
+    .stim-field input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .stim-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .preset-pill {
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text-sub);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .preset-pill:hover {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: #0f766e;
+    }
+
+    .fp-layout {
+      display: grid;
+      grid-template-columns: 185px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .fp-meter-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fp-meter-bars {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .fp-bar-box {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 7px 10px;
+    }
+
+    .fp-bar-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .fp-bar-track {
+      height: 7px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .fp-bar-fill {
+      height: 100%;
+      width: 50%;
+      transition: width 0.2s ease;
+    }
+
+    @media (max-width: 1080px) {
+
+      .hero-grid,
+      .sim-foot-grid,
+      .mid-grid,
+      .imu-grid,
+      .an-grid,
+      .bilateral-grid,
+      .cal-sensor-grid,
+      .stim-layout,
+      .fp-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sensor-pills-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-badge">OA</div>
+      <div>
+        <div class="brand-title">OA Risk Detection &amp; Knee Care</div>
+        <div class="brand-sub">Simple Clinical Gait &amp; Joint Monitor</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="pill" id="fpsDisplay">0 Hz</span>
+      <span class="pill pill-err" id="espStatus"><span class="dot"></span><span id="espStatusText">ESP32
+          Offline</span></span>
+      <span class="pill pill-err" id="connStatus"><span class="dot"></span><span
+          id="connText">Disconnected</span></span>
+    </div>
+  </header>
+
+  <div class="control-strip">
+    <div class="control-group">
+      <label>Patient:</label>
+      <select id="patientSelect" onchange="onPatientSelect()" style="min-width:170px">
+        <option value="">— Walk-in Patient —</option>
+      </select>
+      <div class="seg-toggle" title="Active Monitored Leg (Left / Right)">
+        <button type="button" id="btnLegLeft" class="active" onclick="setActiveLeg('Left')">L</button>
+        <button type="button" id="btnLegRight" onclick="setActiveLeg('Right')">R</button>
+      </div>
+      <button class="btn btn-soft btn-sm" onclick="openPatientDB()"> Manage</button>
+      <button class="btn btn-soft btn-sm" onclick="openCalModal()"> <span id="calBadgeText">Calibrate</span></button>
+    </div>
+
+    <div class="control-group">
+      <label>Source:</label>
+      <select id="simProfile">
+        <option value="normal">Sim: Normal Gait</option>
+        <option value="early_oa">Sim: Early OA (Stiff)</option>
+        <option value="severe_oa">Sim: Severe OA</option>
+        <option value="hyperflexion">Sim: Hyperflexion</option>
+        <option value="ex_seated_flex">Sim: Seated Flex-Ext</option>
+        <option value="ex_sit_to_stand">Sim: Sit-to-Stand</option>
+        <option value="ex_mini_squat">Sim: Mini-Squat</option>
+        <option value="ex_weight_shift">Sim: Heel-Toe Shift</option>
+      </select>
+      <button class="btn btn-teal btn-sm" id="btnSim" onclick="toggleSimulator()">▶ Start Sim</button>
+      <button class="btn btn-soft btn-sm" onclick="openConnectModal()"> ESP32 WiFi</button>
+    </div>
+
+    <div class="control-group">
+      <button class="btn btn-green btn-sm" id="btnRecord" onclick="toggleRecording()">Rec Record Session</button>
+      <label class="auto-pill" title="Auto-record and maintain session history whenever ESP32 or Simulator streams">
+        <input type="checkbox" id="chkAutoRecord" checked onchange="toggleAutoRecord(this.checked)"> Auto-Save
+      </label>
+      <span style="font-size:11px;color:var(--text-muted);font-weight:600" id="sessionTimer">Idle</span>
+      <button class="btn btn-soft btn-sm" onclick="openSessionHistory()"> History</button>
+      <button class="btn btn-soft btn-sm" onclick="openAnalyticsModal()"> Analytics</button>
+      <button class="btn btn-soft btn-sm" onclick="openPrintableReport()"> Report</button>
+      <button class="btn btn-soft btn-sm" onclick="openRefModal()"> Ref Guide</button>
+      <button class="btn btn-soft btn-sm" onclick="openThresholdModal()">Settings</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Slim Status Bar -->
+    <div class="status-bar initializing" id="systemStatus">
+      <div class="status-left">
+        <div class="status-emoji" id="statusIcon">⏳</div>
+        <div>
+          <h2 id="statusTitle">Device Initializing</h2>
+          <div class="status-sub" id="statusReason">Waiting for ESP32 WiFi or Simulator stream (Green LED blinking, Red
+            &amp; Buzzer OFF).</div>
+        </div>
+      </div>
+      <div class="hw-leds">
+        <div class="led-item" data-tip="Green LED (GPIO 26) | Blinking = Waiting/Sensor Fault · Bright ON = Normal movement · Dim (Less Green) = Moderate Watch · OFF = Bad / Red Alert."><span class="led-dot green-blink" id="greenLed"></span>Normal LED</div>
+        <div class="led-item" data-tip="Alert Red LED (GPIO 27) | Solid ON = Critical Joint Risk / Strain / Severe OA alert · OFF = Normal / Moderate."><span class="led-dot" id="redLed"></span>Alert LED</div>
+        <div class="led-item" data-tip="Piezo Buzzer (GPIO 25) | ON = Critical joint warning · OFF = Normal safe gait."><span id="buzzerIcon"> OFF</span>&nbsp;Buzzer</div>
+        <button type="button" class="btn btn-soft btn-sm" id="btnBuzzerAudio" onclick="toggleBrowserBuzzer()"
+          title="Toggle Browser Alarm Chime on Critical/Abnormal"> Alarm</button>
+      </div>
+    </div>
+
+    <!-- Hero: Full-Leg 5-Sensor Simulation + OA Risk Meter -->
+    <div class="hero-grid">
+      <!-- Left: Full-Leg Real-Time All-Sensor Simulation -->
+      <section class="card">
+        <div class="card-head">
+          <div class="card-title"> Full-Leg Real-Time Simulation </div>
+          <span class="card-hint" id="calHintText">0° = straight standing</span>
+        </div>
+        <div class="sim-stage">
+          <canvas id="legCanvas" width="540" height="350"
+            style="width:100%;max-width:540px;height:auto;display:block"></canvas>
+        </div>
+        <div class="sensor-pills-row">
+          <div class="mini-sensor" id="pillThigh">
+            <div class="mini-sensor-lbl"><span class="sensor-dot" id="dotThigh"></span>Thigh IMU</div>
+            <div class="mini-sensor-val" id="fuseThigh">P:--° R:--°</div>
+          </div>
+          <div class="mini-sensor" id="pillShin">
+            <div class="mini-sensor-lbl"><span class="sensor-dot" id="dotShin"></span>Shin IMU</div>
+            <div class="mini-sensor-val" id="fuseShin">P:--° R:--°</div>
+          </div>
+          <div class="mini-sensor" id="pillFlex">
+            <div class="mini-sensor-lbl"><span class="sensor-dot" id="dotFlex"></span>Knee Flex</div>
+            <div class="mini-sensor-val" id="fuseFlex">ADC:--</div>
+          </div>
+          <div class="mini-sensor" id="pillHeel">
+            <div class="mini-sensor-lbl"><span class="sensor-dot" id="dotHeel"></span>Heel FSR</div>
+            <div class="mini-sensor-val" id="fuseHeel">-- (--%)</div>
+          </div>
+          <div class="mini-sensor" id="pillFore">
+            <div class="mini-sensor-lbl"><span class="sensor-dot" id="dotFore"></span>Forefoot FSR</div>
+            <div class="mini-sensor-val" id="fuseFore">-- (--%)</div>
+          </div>
+        </div>
+        <div class="sensor-fault-banner" id="sensorFaultBanner">
+          <span></span><span id="sensorFaultText">Sensor diagnostic warning</span>
+        </div>
+      </section>
+
+      <!-- Right: OA Risk Meter & Essential Metrics -->
+      <section class="card">
+        <div class="card-head">
+          <div class="card-title"> OA Risk Meter</div>
+          <span class="card-hint" id="aiConfidence">Window: 0/15</span>
+        </div>
+
+        <div class="risk-top">
+          <svg class="risk-svg" viewBox="0 0 250 142">
+            <path d="M 35 118 A 90 90 0 0 1 82 40" fill="none" stroke="#a7f3d0" stroke-width="16"
+              stroke-linecap="round" />
+            <path d="M 86 37 A 90 90 0 0 1 164 37" fill="none" stroke="#fde68a" stroke-width="16" />
+            <path d="M 168 40 A 90 90 0 0 1 215 118" fill="none" stroke="#fecdd3" stroke-width="16"
+              stroke-linecap="round" />
+            <g id="riskNeedle" class="risk-needle" style="transform:rotate(-90deg)">
+              <line x1="125" y1="118" x2="125" y2="38" stroke="#1e2d2f" stroke-width="3.5" stroke-linecap="round" />
+              <circle cx="125" cy="118" r="7" fill="#0d9488" stroke="#ffffff" stroke-width="2" />
+            </g>
+            <text x="30" y="135" font-size="10" fill="#059669" font-weight="600" text-anchor="middle">LOW</text>
+            <text x="125" y="18" font-size="10" fill="#b45309" font-weight="600" text-anchor="middle">MODERATE</text>
+            <text x="220" y="135" font-size="10" fill="#be123c" font-weight="600" text-anchor="middle">HIGH</text>
+          </svg>
+          <div class="risk-num" id="aiBigScore" style="color:var(--teal)">--</div>
+          <span class="tier-badge tier-Pending" id="aiTierBadge">Pending</span>
+        </div>
+
+        <div class="essential-grid">
+          <div class="essential-tile">
+            <div class="essential-lbl">Knee Flexion</div>
+            <div class="essential-val" id="valKneeAngle">--°</div>
+            <div class="essential-sub" id="threshRangeHint">Safe: -10° to 135°</div>
+          </div>
+          <div class="essential-tile">
+            <div class="essential-lbl">Gait ROM</div>
+            <div class="essential-val" id="aiRom">--°</div>
+            <div class="essential-sub">Ext def: <span id="aiExtDef">--°</span> · Varus: <span id="aiVarusVel">--
+                °/s</span></div>
+          </div>
+          <div class="essential-tile">
+            <div class="essential-lbl">Foot Imbalance</div>
+            <div class="essential-val" id="valImbalance">--%</div>
+            <div class="essential-sub">Heel <span id="heelPercent">--%</span> · Toe <span id="forePercent">--%</span>
+            </div>
+          </div>
+          <div class="essential-tile">
+            <div class="essential-lbl">Joint Speed / Cadence</div>
+            <div class="essential-val" id="aiVel">-- °/s</div>
+            <div class="essential-sub">Stiff: <span id="aiStiff">--</span> · <span id="aiCadence">--</span> spm · Stance
+              <span id="aiStance">--%</span></div>
+          </div>
+        </div>
+
+        <div class="risk-bars">
+          <div class="rb-box">
+            <div class="rb-head"><span>ROM Deficit</span><span id="rbRomVal">0%</span></div>
+            <div class="rb-track">
+              <div class="rb-fill" id="rbRomFill" style="background:var(--teal)"></div>
+            </div>
+          </div>
+          <div class="rb-box">
+            <div class="rb-head"><span>Flex Stiffness</span><span id="rbStiffVal">0%</span></div>
+            <div class="rb-track">
+              <div class="rb-fill" id="rbStiffFill" style="background:#f59e0b"></div>
+            </div>
+          </div>
+          <div class="rb-box">
+            <div class="rb-head"><span>Foot Asymmetry</span><span id="rbAsymVal">0%</span></div>
+            <div class="rb-track">
+              <div class="rb-fill" id="rbAsymFill" style="background:var(--indigo)"></div>
+            </div>
+          </div>
+          <div class="rb-box">
+            <div class="rb-head"><span>Jerk / Wobble</span><span id="rbJerkVal">0%</span></div>
+            <div class="rb-track">
+              <div class="rb-fill" id="rbJerkFill" style="background:var(--rose)"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="markers-wrap" id="aiMarkers">
+          <span class="marker-chip">Waiting for gait stream (~1.5s) to compute OA markers...</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- Row 2: Interactive Joint Angle / Foot Pressure Simulator + Foot Pressure Meter -->
+    <div class="sim-foot-grid">
+      <section class="card">
+        <div class="card-head">
+          <div class="card-title"> Joint Angle &amp; Foot Pressure Simulator</div>
+          <span class="tier-badge tier-Low" id="stimAngleBadge">Safe ROM</span>
+        </div>
+        <div class="stim-layout">
+          <div class="stim-stage">
+            <canvas id="jointAngleCanvas" width="205" height="175"></canvas>
+          </div>
+          <div class="stim-fields">
+            <div class="stim-field">
+              <label><span>Knee Angle</span><strong id="stimAngleVal">30°</strong></label>
+              <input type="range" id="stimAngle" min="-15" max="150" step="1" value="30" oninput="onStimInput(false)">
+            </div>
+            <div class="stim-field">
+              <label><span>Heel Pressure (FSR 1)</span><strong id="stimHeelVal">1650</strong></label>
+              <input type="range" id="stimHeel" min="0" max="4095" step="25" value="1650" oninput="onStimInput(false)">
+            </div>
+            <div class="stim-field">
+              <label><span>Forefoot Pressure (FSR 2)</span><strong id="stimForeVal">1600</strong></label>
+              <input type="range" id="stimFore" min="0" max="4095" step="25" value="1600" oninput="onStimInput(false)">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div class="stim-field">
+                <label><span>Thigh Tilt</span><strong id="stimThighVal">10°</strong></label>
+                <input type="range" id="stimThighPitch" min="-30" max="85" step="1" value="10"
+                  oninput="onStimInput(false)">
+              </div>
+              <div class="stim-field">
+                <label><span>Varus Wobble</span><strong id="stimRollVal">+1.5°</strong></label>
+                <input type="range" id="stimRoll" min="-20" max="20" step="0.5" value="1.5"
+                  oninput="onStimInput(false)">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stim-presets" id="stimPresetRow"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap">
+          <button type="button" class="btn btn-soft btn-sm" onclick="applyStimulation(1)"> Apply Stimulus</button>
+          <button type="button" class="btn btn-teal btn-sm" onclick="applyStimulation(16)"> Stream 2s to AI</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <div class="card-title"> Foot Pressure Heatmap &amp; Balance Meter</div>
+          <span class="tier-badge tier-Low" id="fpZoneBadge">Balanced</span>
+        </div>
+        <div class="fp-layout">
+          <div class="stim-stage">
+            <canvas id="footPressureCanvas" width="185" height="240"></canvas>
+          </div>
+          <div class="fp-meter-panel">
+            <svg viewBox="0 0 220 120" style="width:190px;height:105px">
+              <path d="M 28 102 A 82 82 0 0 1 78 26" fill="none" stroke="#93c5fd" stroke-width="15"
+                stroke-linecap="round" />
+              <path d="M 82 25 A 82 82 0 0 1 138 25" fill="none" stroke="#6ee7b7" stroke-width="15" />
+              <path d="M 142 26 A 82 82 0 0 1 192 102" fill="none" stroke="#c4b5fd" stroke-width="15"
+                stroke-linecap="round" />
+              <g id="fpMeterNeedle"
+                style="transform:rotate(0deg);transform-origin:110px 102px;transition:transform 0.25s cubic-bezier(.22,1,.36,1)">
+                <line x1="110" y1="102" x2="110" y2="30" stroke="#1e2d2f" stroke-width="3.2" stroke-linecap="round" />
+                <circle cx="110" cy="102" r="6" fill="#0d9488" stroke="#ffffff" stroke-width="2" />
+              </g>
+              <text x="24" y="116" font-size="9" font-weight="700" fill="#2563eb" text-anchor="middle">HEEL</text>
+              <text x="110" y="14" font-size="9" font-weight="700" fill="#059669" text-anchor="middle">BALANCED</text>
+              <text x="196" y="116" font-size="9" font-weight="700" fill="#7c3aed" text-anchor="middle">FOREFOOT</text>
+            </svg>
+            <div style="text-align:center">
+              <div style="font-size:22px;font-weight:800;line-height:1.1;color:var(--text-main)" id="fpImbalanceVal">
+                0.0%</div>
+              <div style="font-size:11px;color:var(--text-muted)" id="fpTotalLoad">Imbalance · Total Load 0%</div>
+            </div>
+            <div class="fp-meter-bars">
+              <div class="fp-bar-box">
+                <div class="fp-bar-head"><span>Heel FSR (GPIO 34)</span><span id="fpHeelText">0 · 50%</span></div>
+                <div class="fp-bar-track">
+                  <div class="fp-bar-fill" id="fpHeelBar" style="background:#2563eb"></div>
+                </div>
+              </div>
+              <div class="fp-bar-box">
+                <div class="fp-bar-head"><span>Forefoot FSR (GPIO 35)</span><span id="fpForeText">0 · 50%</span></div>
+                <div class="fp-bar-track">
+                  <div class="fp-bar-fill" id="fpForeBar" style="background:#7c3aed"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Middle: Guided Exercises + Live Gait Chart -->
+    <div class="mid-grid">
+      <section class="card">
+        <div class="card-head">
+          <div class="card-title"> Guided OA Detection Exercises</div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <div class="seg-toggle" title="Exercise Language (English / Hindi)">
+              <button type="button" id="btnLangEn" class="active" onclick="setLanguage('en')">EN</button>
+              <button type="button" id="btnLangHi" onclick="setLanguage('hi')">हिं</button>
+            </div>
+            <button type="button" class="btn btn-soft btn-sm" id="btnVoiceToggle" onclick="toggleVoiceCoaching()"
+              title="Toggle Hands-Free Voice Guidance"> Voice</button>
+            <span class="tier-badge tier-Pending" id="exStatusBadge">Idle</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <select id="exerciseSelect" onchange="onExerciseSelectChange()" style="flex:1;min-width:190px"></select>
+          <button class="btn btn-teal btn-sm" id="btnStartExSim" onclick="startExercise(true)">▶ Demo Sim</button>
+          <button class="btn btn-green btn-sm" id="btnStartExLive" onclick="startExercise(false)">▶ Live ESP32</button>
+          <button class="btn btn-rose btn-sm" id="btnStopEx" onclick="stopExercise()" disabled>Stop Save Trial</button>
+        </div>
+        <div class="ex-cue">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong id="exTitle" style="font-size:13px;color:#0f766e">Select an exercise</strong>
+            <strong id="exReps" style="font-size:12px;color:var(--teal)">Reps: 0 / 5</strong>
+          </div>
+          <div id="exCue" style="font-size:12px;color:var(--text-sub);margin-top:4px">Pick a protocol to measure
+            multi-sensor joint ROM, stability, and plantar transfer.</div>
+          <div style="height:6px;background:#cce8e3;border-radius:4px;overflow:hidden;margin-top:8px">
+            <div id="exProgressFill" style="height:100%;width:0%;background:var(--teal);transition:width 0.25s"></div>
+          </div>
+        </div>
+        <div class="ex-stats">
+          <div class="ex-stat">
+            <div class="ex-stat-lbl">Quality</div>
+            <div class="ex-stat-val" id="exQuality">--%</div>
+          </div>
+          <div class="ex-stat">
+            <div class="ex-stat-lbl">ROM</div>
+            <div class="ex-stat-val" id="exRom">--°</div>
+          </div>
+          <div class="ex-stat">
+            <div class="ex-stat-lbl">Wobble</div>
+            <div class="ex-stat-val" id="exWobble">--°</div>
+          </div>
+          <div class="ex-stat">
+            <div class="ex-stat-lbl">Flex Match</div>
+            <div class="ex-stat-val" id="exFlexMatch">--%</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <div class="card-title"> Live Joint Angle &amp; Foot Pressure</div>
+          <span class="card-hint">10 Hz smooth real-time wave</span>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="chartUnified"></canvas>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bottom Tabbed Card: Clean Access to Alerts, Trials, Raw IMUs, and Export -->
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div class="tabs" style="border-bottom:none;padding-bottom:0;margin-bottom:0">
+          <button class="tab-btn active" onclick="switchTab('tabAlerts', this)"> Alerts (<span
+              id="alertCount">0</span>)</button>
+          <button class="tab-btn" id="btnTabSessions" onclick="switchTab('tabSessions', this)"> Session History (<span
+              id="sessionTabCount">0</span>)</button>
+          <button class="tab-btn" onclick="switchTab('tabTrials', this)"> Exercise Trials</button>
+          <button class="tab-btn" onclick="switchTab('tabRaw', this)"> Raw IMU &amp; Flex</button>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span style="font-size:11px;color:var(--text-muted)">Samples: <strong id="dataCount">0</strong></span>
+          <button class="btn btn-soft btn-sm" onclick="clearLiveBuffer()">Clear Clear</button>
+          <button class="btn btn-soft btn-sm" onclick="exportCurrentCSV()"> CSV</button>
+          <button class="btn btn-soft btn-sm" onclick="exportCurrentJSON()"> JSON</button>
+        </div>
+      </div>
+      <div style="height:1px;background:var(--border);margin:10px 0 12px"></div>
+
+      <div id="tabAlerts" class="tab-pane active">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:6px">
+          <button class="btn btn-soft btn-sm" onclick="clearAlerts()">Clear Alerts (DB)</button>
+        </div>
+        <div class="scroll-list" id="alertList">
+          <div style="text-align:center;color:var(--text-muted);padding:18px;font-size:12px">No alerts yet — all
+            parameters calm.</div>
+        </div>
+      </div>
+
+      <div id="tabSessions" class="tab-pane">
+        <div id="activeSessionBanner" class="sess-card active-rec" style="display:none;margin-bottom:10px">
+          <div class="sess-head">
+            <div>
+              <strong style="font-size:12.5px;color:#15803d" id="activeSessionLabel">Rec Recording live session...</strong>
+              <div style="font-size:11px;color:var(--text-sub)" id="activeSessionSub">Auto-maintaining telemetry in SQLite</div>
+            </div>
+            <button class="btn btn-rose btn-sm" onclick="toggleRecording()">Stop Stop &amp; Save</button>
+          </div>
+        </div>
+        <div class="sess-toolbar">
+          <div style="display:flex;gap:6px;align-items:center">
+            <button type="button" class="btn btn-teal btn-sm" id="btnDashSessAll" onclick="setSessionFilter('all')">All Sessions</button>
+            <button type="button" class="btn btn-soft btn-sm" id="btnDashSessPat" onclick="setSessionFilter('patient')">Current Patient</button>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button type="button" class="btn btn-soft btn-sm" onclick="loadSessionHistory()">Refresh Refresh</button>
+          </div>
+        </div>
+        <div class="scroll-list" id="dashboardSessionList" style="max-height:280px">
+          <div style="text-align:center;color:var(--text-muted);padding:18px;font-size:12px">No recorded sessions yet — click <strong>Record Session</strong> or start <strong>Sim / ESP32</strong> with Auto-Save on.</div>
+        </div>
+      </div>
+
+      <div id="tabTrials" class="tab-pane">
+        <div style="display:flex;justify-content:flex-end;margin-bottom:6px">
+          <a class="btn btn-soft btn-sm" style="text-decoration:none" id="btnExportTrialsCsv"
+            href="/api/exercises/trials/export/csv"> Export Trials CSV</a>
+        </div>
+        <div class="scroll-list" id="exerciseTrialsList">
+          <div style="text-align:center;color:var(--text-muted);padding:18px;font-size:12px">No completed exercise
+            trials saved yet.</div>
+        </div>
+      </div>
+
+      <div id="tabRaw" class="tab-pane">
+        <div class="imu-grid">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:6px">MPU6050 #1 — Thigh (0x68)
+            </div>
+            <table class="imu-table">
+              <tr>
+                <th>Axis</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+              </tr>
+              <tr>
+                <th>Accel (g)</th>
+                <td id="t_ax">--</td>
+                <td id="t_ay">--</td>
+                <td id="t_az">--</td>
+              </tr>
+              <tr>
+                <th>Gyro (°/s)</th>
+                <td id="t_gx">--</td>
+                <td id="t_gy">--</td>
+                <td id="t_gz">--</td>
+              </tr>
+              <tr>
+                <th>Calibrated</th>
+                <td id="t_pitchC">P:--</td>
+                <td id="t_rollC" colspan="2">R:--</td>
+              </tr>
+            </table>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:6px">MPU6050 #2 — Shin (0x69)
+            </div>
+            <table class="imu-table">
+              <tr>
+                <th>Axis</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Z</th>
+              </tr>
+              <tr>
+                <th>Accel (g)</th>
+                <td id="s_ax">--</td>
+                <td id="s_ay">--</td>
+                <td id="s_az">--</td>
+              </tr>
+              <tr>
+                <th>Gyro (°/s)</th>
+                <td id="s_gx">--</td>
+                <td id="s_gy">--</td>
+                <td id="s_gz">--</td>
+              </tr>
+              <tr>
+                <th>Calibrated</th>
+                <td id="s_pitchC">P:--</td>
+                <td id="s_rollC" colspan="2">R:--</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Patient Modal -->
+  <div class="modal-overlay" id="patientModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('patientModal')">&times;</button>
+      <h2> Patient Database</h2>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button class="btn btn-teal btn-sm" onclick="openNewPatientForm()">+ New Patient</button>
+        <input type="text" id="patientSearch" placeholder="Search patients..." style="flex:1"
+          oninput="filterPatients()">
+      </div>
+      <div id="patientListContainer"></div>
+      <div id="newPatientForm"
+        style="display:none;margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--bg-soft)">
+        <h3 id="patientFormTitle" style="font-size:14px;margin-bottom:10px">Register New Patient</h3>
+        <input type="hidden" id="editPatientId" value="">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name *</label><input type="text" id="npName"></div>
+          <div class="form-group"><label>Age</label><input type="number" id="npAge"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Gender</label><select id="npGender">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select></div>
+          <div class="form-group"><label>Monitored Leg</label><select id="npLeg">
+              <option>Left</option>
+              <option>Right</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Height (cm)</label><input type="number" id="npHeight"></div>
+          <div class="form-group"><label>Weight (kg)</label><input type="number" id="npWeight"></div>
+        </div>
+        <div class="form-group"><label>District / Region (NER)</label><input type="text" id="npDistrict"
+            placeholder="e.g. Kamrup, Imphal, Shillong"></div>
+        <div class="form-group"><label>Clinical Notes</label><textarea id="npNotes" rows="2"></textarea></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn btn-soft btn-sm" onclick="closePatientForm()">Cancel</button>
+          <button class="btn btn-teal btn-sm" onclick="savePatientForm()">Save Patient</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calibration Modal (Auto Standing + Manual Per-Sensor Calibration + Beginner Guide) -->
+  <div class="modal-overlay" id="calModal">
+    <div class="modal" style="max-width:750px">
+      <button class="modal-close" onclick="closeModal('calModal')">&times;</button>
+      <h2> Leg &amp; Sensor Calibration</h2>
+
+      <div
+        style="background:var(--teal-soft);border:1px solid #cce8e3;border-radius:10px;padding:10px 13px;font-size:11.5px;color:#134e4a;line-height:1.5;margin-bottom:10px">
+        <strong> How to Calibrate (For First-Time Users):</strong>
+        <ol style="margin:4px 0 0 18px">
+          <li><strong>Wear All 5 Sensors:</strong> Strap Thigh IMU (above knee), Shin IMU (below knee), Flex strip over
+            the front kneecap, and Heel/Forefoot FSRs inside the shoe.</li>
+          <li><strong>Option 1 — Auto Calibrate (Recommended):</strong> Have the patient <strong>stand straight &amp;
+              still (0°)</strong> for 2 seconds, then click <strong> Auto Calibrate (Stand Straight 0°)</strong>. The
+            knee angle zeros immediately. <em>(Optional: bend knee ~90° and click Step 2 to auto-check flex &amp; strap
+              polarity.)</em></li>
+          <li><strong>Option 2 — Manual Per-Sensor Tuning:</strong> Because leg thickness and shoe fit vary per person,
+            adjust any individual sensor card below (lift foot slightly before clicking Heel/Forefoot Tare), then click
+            <strong> Save &amp; Sync All 5 Sensors</strong>.</li>
+        </ol>
+      </div>
+
+      <div
+        style="padding:9px 12px;border-radius:10px;background:var(--bg-soft);border:1px solid var(--border);margin-bottom:10px;font-size:12px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <div>Status: <strong id="calStatusLabel">Not Calibrated</strong></div>
+          <div id="calOffsets" style="font-family:monospace;font-size:11px;color:var(--text-muted)">No offsets saved
+            yet.</div>
+        </div>
+        <div id="calProgress"
+          style="display:none;height:6px;background:#dce6e3;border-radius:4px;overflow:hidden;margin-top:8px">
+          <div id="calProgressFill" style="height:100%;width:0%;background:var(--teal);transition:width 0.25s"></div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px">
+        Auto Calibration (Quick 1-Click)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+        <button type="button" class="btn btn-teal btn-sm" onclick="autoCalibrateStanding()"> Auto Calibrate (Stand
+          Straight 0°)</button>
+        <button type="button" class="btn btn-blue btn-sm" onclick="requestCalibration('step2')">2. Auto Capture Knee
+          ~90° (Optional)</button>
+        <button type="button" class="btn btn-soft btn-sm" onclick="requestCalibration('reset')">↺ Reset All</button>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin-bottom:2px">
+        Manual Calibration (Tune Each Sensor for Different Leg Sizes)</div>
+      <div class="cal-sensor-grid">
+        <!-- Sensor 1: Thigh IMU -->
+        <div class="cal-sensor-card">
+          <div class="cal-sensor-head">
+            <span class="cal-sensor-title">1. Thigh MPU6050 (0x68)</span>
+            <span class="cal-raw-tag" id="calRawThigh">P:--° R:--°</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--text-sub);margin-bottom:6px">Stand straight &amp; zero thigh slope if
+            strap tilts on larger/slimmer thighs.</div>
+          <div class="cal-mini-row">
+            <div><label>Pitch Off (°)</label><input type="number" step="0.1" id="calThighP" value="0"></div>
+            <div><label>Roll Off (°)</label><input type="number" step="0.1" id="calThighR" value="0"></div>
+            <div><label>Polarity</label><select id="calThighPol">
+                <option value="1">+1 Normal</option>
+                <option value="-1">-1 Flipped</option>
+              </select></div>
+          </div>
+          <button type="button" class="btn btn-soft btn-sm" style="width:100%"
+            onclick="captureSensorCal('imu_thigh')"> Zero Thigh at Current Angle</button>
+        </div>
+
+        <!-- Sensor 2: Shin IMU -->
+        <div class="cal-sensor-card">
+          <div class="cal-sensor-head">
+            <span class="cal-sensor-title">2. Shin MPU6050 (0x69)</span>
+            <span class="cal-raw-tag" id="calRawShin">P:--° R:--°</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--text-sub);margin-bottom:6px">Stand straight for 0°, or bend 90° &amp;
+            click Auto Pol if angle bends negative.</div>
+          <div class="cal-mini-row">
+            <div><label>Pitch Off (°)</label><input type="number" step="0.1" id="calShinP" value="0"></div>
+            <div><label>Roll Off (°)</label><input type="number" step="0.1" id="calShinR" value="0"></div>
+            <div><label>Polarity</label><select id="calShinPol">
+                <option value="1">+1 Normal</option>
+                <option value="-1">-1 Flipped</option>
+              </select></div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button type="button" class="btn btn-soft btn-sm" style="flex:1" onclick="captureSensorCal('imu_shin')">
+              Zero Shin (0°)</button>
+            <button type="button" class="btn btn-soft btn-sm" style="flex:1"
+              onclick="captureSensorCal('imu_shin_pol')"> Auto 90° Pol</button>
+          </div>
+        </div>
+
+        <!-- Sensor 3: Knee Flex Sensor -->
+        <div class="cal-sensor-card">
+          <div class="cal-sensor-head">
+            <span class="cal-sensor-title">3. Knee Flex Sensor (GPIO 32)</span>
+            <span class="cal-raw-tag" id="calRawFlex">ADC:--</span>
+          </div>
+          <div style="font-size:10.5px;color:var(--text-sub);margin-bottom:6px">Capture ADC with knee straight (0°) and
+            bent (90°) to match knee girth.</div>
+          <div class="cal-mini-row" style="grid-template-columns:1fr 1fr">
+            <div><label>0° Straight ADC</label><input type="number" step="1" id="calFlexStraight" value="2048"></div>
+            <div><label>90° Bent ADC</label><input type="number" step="1" id="calFlexBent" value="1200"></div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button type="button" class="btn btn-soft btn-sm" style="flex:1"
+              onclick="captureSensorCal('flex_0')">Capture 0° Straight</button>
+            <button type="button" class="btn btn-soft btn-sm" style="flex:1"
+              onclick="captureSensorCal('flex_90')">Capture 90° Bent</button>
+          </div>
+        </div>
+
+        <!-- Sensors 4 & 5: Heel & Forefoot FSRs -->
+        <div class="cal-sensor-card">
+          <div class="cal-sensor-head">
+            <span class="cal-sensor-title">4 &amp; 5. Foot FSRs (GPIO 34 / 35)</span>
+            <span class="cal-raw-tag"><span id="calRawHeel">H:--</span> · <span id="calRawFore">F:--</span></span>
+          </div>
+          <div style="font-size:10.5px;color:var(--text-sub);margin-bottom:6px">Lift foot off floor before tapping Tare
+            so shoe pressure isn't zeroed out.</div>
+          <div class="cal-mini-row" style="grid-template-columns:1fr 1fr">
+            <div><label>Heel Tare (ADC)</label><input type="number" step="1" min="0" id="calFsrHeelTare" value="0">
+            </div>
+            <div><label>Forefoot Tare (ADC)</label><input type="number" step="1" min="0" id="calFsrForeTare" value="0">
+            </div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button type="button" class="btn btn-soft btn-sm" style="flex:1" onclick="captureSensorCal('fsr_heel')">
+              Tare Heel (Lifted)</button>
+            <button type="button" class="btn btn-soft btn-sm" style="flex:1" onclick="captureSensorCal('fsr_fore')">
+              Tare Fore (Lifted)</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+        <button type="button" class="btn btn-teal btn-sm" onclick="applyPerSensorCalibration()"> Save &amp; Sync All 5
+          Sensors</button>
+        <button type="button" class="btn btn-soft btn-sm" onclick="closeModal('calModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESP32 WiFi Modal -->
+  <div class="modal-overlay" id="connectModal">
+    <div class="modal" style="max-width:480px">
+      <button class="modal-close" onclick="closeModal('connectModal')">&times;</button>
+      <h2> ESP32 WiFi Connection</h2>
+      <p style="font-size:12px;color:var(--text-sub);margin-bottom:10px">
+        Recommended: Flash <code>OA_Detection_ESP32.ino</code> with your WiFi &amp; laptop IP so ESP32 pushes
+        automatically to:
+      </p>
+      <div
+        style="padding:8px 12px;border-radius:8px;background:var(--teal-soft);color:#0f766e;font-family:monospace;font-size:12px;margin-bottom:14px"
+        id="wsPushHint">ws://localhost:8000/ws/esp32</div>
+      <div class="form-row">
+        <div class="form-group"><label>Fallback ESP32 IP (Port 81)</label><input type="text" id="espIp"
+            placeholder="192.168.x.x"></div>
+        <div class="form-group"><label>Port</label><input type="text" id="espPort" value="81"></div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn btn-teal btn-sm" id="btnConnect" onclick="toggleDeviceConnection()">Bridge ESP32 IP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Session History Modal -->
+  <div class="modal-overlay" id="sessionModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('sessionModal')">&times;</button>
+      <h2> Recorded Clinical Sessions</h2>
+      <div id="sessionListContainer">
+        <div style="text-align:center;color:var(--text-muted);padding:20px">Loading sessions...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Threshold Settings Modal -->
+  <div class="modal-overlay" id="thresholdModal">
+    <div class="modal" style="max-width:480px">
+      <button class="modal-close" onclick="closeModal('thresholdModal')">&times;</button>
+      <h2>Settings Clinical Thresholds</h2>
+      <div class="form-row">
+        <div class="form-group"><label>Min Flexion (° Hyper-Ext)</label><input type="number" id="thKneeMin" step="1"
+            value="-10"></div>
+        <div class="form-group"><label>Max Flexion (° Hyper-Flex)</label><input type="number" id="thKneeMax" step="1"
+            value="135"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>FSR Imbalance Limit (%)</label><input type="number" id="thFsrImb" step="1"
+            value="60"></div>
+        <div class="form-group"><label>Flex Stiffness Ratio (0–1)</label><input type="number" id="thFlexStiff"
+            step="0.05" value="0.25"></div>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:8px">
+        <input type="checkbox" id="thAutoRecord" style="width:auto">
+        <label style="margin:0">Auto-start recording session when ESP32 streams</label>
+      </div>
+      <div
+        style="font-size:11px;color:var(--text-sub);background:var(--bg-soft);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-top:8px">
+        <strong>Universal Medical Basis:</strong> 100 Hz IMU (±4g / ±500°/s / 20 Hz DLPF) · AAOS ROM
+        <code>-10° to 135°</code> · Contracture <code>&gt;5°</code> · Gait ROM norm <code>~60°</code> (OA
+        <code>&lt;48°</code>) · Varus velocity <code>≥28.1°/s</code> · Stance <code>~60%</code> · WHO BMI
+        <code>18.5 / 25 / 30</code> · ACR Age <code>≥45y</code>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+        <button class="btn btn-soft btn-sm" onclick="closeModal('thresholdModal')">Cancel</button>
+        <button class="btn btn-teal btn-sm" onclick="saveThresholds()">Apply &amp; Sync</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clinical Analytics Modal (Progress, Bilateral L/R, NER Districts) -->
+  <div class="modal-overlay" id="analyticsModal">
+    <div class="modal" style="max-width:740px">
+      <button class="modal-close" onclick="closeModal('analyticsModal')">&times;</button>
+      <h2> Clinical OA Analytics &amp; Regional Summary</h2>
+      <div class="analytics-tabs">
+        <button type="button" class="an-tab active" id="btnTabProgress" onclick="switchAnalyticsTab('progress')">
+          Visit Progress &amp; BMI</button>
+        <button type="button" class="an-tab" id="btnTabBilateral" onclick="switchAnalyticsTab('bilateral')"> Left vs
+          Right Leg</button>
+        <button type="button" class="an-tab" id="btnTabNer" onclick="switchAnalyticsTab('ner')"> NER District
+          Screening</button>
+      </div>
+
+      <div id="tabProgress">
+        <div class="an-grid">
+          <div class="an-box">
+            <div class="an-lbl">Patient BMI</div>
+            <div class="an-val" id="anBmiVal">--</div>
+            <div style="font-size:11px;color:var(--text-sub)" id="anBmiCat">Select a patient</div>
+          </div>
+          <div class="an-box">
+            <div class="an-lbl">Latest Gait OA Risk</div>
+            <div class="an-val" id="anLatestRisk">--</div>
+            <div style="font-size:11px;color:var(--text-sub)" id="anLatestTier">Pending</div>
+          </div>
+          <div class="an-box">
+            <div class="an-lbl">Visit Trend</div>
+            <div class="an-val" id="anTrendDir">--</div>
+            <div style="font-size:11px;color:var(--text-sub)" id="anVisitCount">0 sessions</div>
+          </div>
+        </div>
+        <div
+          style="font-size:12px;color:var(--text-sub);background:var(--bg-soft);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin-bottom:12px"
+          id="anBmiNote">
+          Select a registered patient to view BMI joint-load assessment and chronological visit progress.
+        </div>
+        <div style="height:175px;position:relative;margin-bottom:12px">
+          <canvas id="chartTrend"></canvas>
+        </div>
+        <div id="anRecsBox" style="font-size:12px;color:var(--text-main);margin-bottom:10px"></div>
+      </div>
+
+      <div id="tabBilateral" style="display:none">
+        <div
+          style="font-size:12px;font-weight:600;padding:9px 12px;border-radius:10px;background:var(--bg-soft);border:1px solid var(--border);margin-bottom:12px"
+          id="anBilatSummary">
+          Record sessions on both Left and Right legs to compare inter-limb symmetry.
+        </div>
+        <div class="bilateral-grid">
+          <div class="an-box" id="anLeftCard">
+            <div class="an-lbl">Left Knee</div>
+            <div class="an-val" style="margin-bottom:4px" id="anLeftRom">--° ROM</div>
+            <div style="font-size:12px;color:var(--text-sub)" id="anLeftMeta">0 sessions · Avg Risk --</div>
+          </div>
+          <div class="an-box" id="anRightCard">
+            <div class="an-lbl">Right Knee</div>
+            <div class="an-val" style="margin-bottom:4px" id="anRightRom">--° ROM</div>
+            <div style="font-size:12px;color:var(--text-sub)" id="anRightMeta">0 sessions · Avg Risk --</div>
+          </div>
+        </div>
+        <div class="an-grid" style="grid-template-columns:1fr 1fr">
+          <div class="an-box">
+            <div class="an-lbl">ROM Asymmetry (|L - R|)</div>
+            <div class="an-val" id="anRomDiff">--°</div>
+          </div>
+          <div class="an-box">
+            <div class="an-lbl">OA Risk Diff (|L - R|)</div>
+            <div class="an-val" id="anRiskDiff">-- pts</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tabNer" style="display:none">
+        <div class="an-grid" id="anNerTotals">
+          <div class="an-box">
+            <div class="an-lbl">Total Screened</div>
+            <div class="an-val" id="nerPatients">0</div>
+          </div>
+          <div class="an-box">
+            <div class="an-lbl">Completed Sessions</div>
+            <div class="an-val" id="nerSessions">0</div>
+          </div>
+          <div class="an-box">
+            <div class="an-lbl">NER Avg Risk</div>
+            <div class="an-val" id="nerAvgRisk">--</div>
+          </div>
+        </div>
+        <div style="max-height:240px;overflow:auto;border:1px solid var(--border);border-radius:10px">
+          <table class="an-table">
+            <thead>
+              <tr>
+                <th>District (NER)</th>
+                <th>Patients</th>
+                <th>Sessions</th>
+                <th>Avg Risk</th>
+                <th>Avg ROM</th>
+                <th>Tiers (L/M/H)</th>
+              </tr>
+            </thead>
+            <tbody id="anNerTable">
+              <tr>
+                <td colspan="6" style="text-align:center;color:var(--text-muted)">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+        <button class="btn btn-teal btn-sm" onclick="openPrintableReport()"> Printable Clinical Report</button>
+        <button class="btn btn-soft btn-sm" onclick="closeModal('analyticsModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clinical Reference Points & Glossary Modal -->
+  <div class="modal-overlay" id="refModal">
+    <div class="modal" style="max-width:820px">
+      <button class="modal-close" onclick="closeModal('refModal')">&times;</button>
+      <h2> Clinical Reference Points &amp; Parameter Guide</h2>
+      <p style="font-size:12px;color:var(--text-sub);margin-bottom:10px">
+        How the system determines <strong>Normal</strong> vs. <strong>Problematic (Abnormal / Critical)</strong> values using AAOS, WHO, ACR, and PubMed/JMIR clinical biomechanics baselines (plus what every calibration control does):
+      </p>
+      <div style="max-height:240px;overflow:auto;border:1px solid var(--border);border-radius:10px;margin-bottom:12px">
+        <table class="an-table">
+          <thead>
+            <tr>
+              <th>Clinical Parameter</th>
+              <th>Normal / Healthy</th>
+              <th>Problematic / Alert Cutoff</th>
+              <th>Medical Source</th>
+            </tr>
+          </thead>
+          <tbody id="refTableBody">
+            <tr><td colspan="4" style="text-align:center;color:var(--text-muted)">Loading references...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 style="font-size:13px;color:#0f766e;margin-bottom:6px"> Sensor Calibration &amp; Telemetry Controls Explained</h3>
+      <div style="max-height:190px;overflow:auto;border:1px solid var(--border);border-radius:10px">
+        <table class="an-table">
+          <thead>
+            <tr>
+              <th>Term / Setting</th>
+              <th>What It Means &amp; When to Use It</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>FSR Tare (ADC)</strong></td><td>Resting shoe/sock squeeze subtracted from raw Heel/Forefoot FSR before % load math. Always lift the foot slightly off the ground before clicking Tare.</td></tr>
+            <tr><td><strong>IMU Polarity (+1 / -1)</strong></td><td>Flips flexion sign if a sensor board was strapped upside-down or facing backwards, so bending your knee always increases positively (+0° to +135°).</td></tr>
+            <tr><td><strong>Pitch / Roll Offset (°)</strong></td><td>Static strap mounting slope captured during standing straight (0°), removing leg-shape differences across patients.</td></tr>
+            <tr><td><strong>0° Straight / 90° Bent ADC</strong></td><td>Maps the Knee Flex strip resistance range per knee girth (0° = 0.0 norm, 90° = 1.0 norm). Triggers stiffness alert if Flex Ratio &lt; 0.25 past 45° bend.</td></tr>
+            <tr><td><strong>OA Risk Tiers (0–100)</strong></td><td><strong>Low (&lt;35):</strong> Green LED ON. <strong>Moderate (35–65):</strong> Watch early markers. <strong>High (&gt;65):</strong> Critical Red LED + Buzzer ON.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px">
+        <button class="btn btn-soft btn-sm" onclick="closeModal('refModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <script src="/static/chart.umd.min.js"></script>
+  <script>
+    const BACKEND_MODE = true;
+    const API_BASE = location.protocol.startsWith('http') ? '' : 'http://localhost:8000';
+    const WS_BASE = location.protocol.startsWith('http')
+      ? `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}`
+      : 'ws://localhost:8000';
+    let ws = null, connected = false, autoReconnect = true, reconnectTimer = null;
+    let sessionStart = null, sessionTimerInterval = null;
+    let msgCount = 0, fpsInterval = null, lastFpsCount = 0;
+    let currentPatientId = null, currentCalibration = null;
+    let activeSessionId = null, simRunning = false, liveSampleCount = 0;
+    let currentThresholds = { knee_angle_min: -10, knee_angle_max: 135, fsr_imbalance_thresh: 60, flex_stiff_thresh: 0.25, auto_record_on_stream: false };
+    let allPatients = [], exerciseCatalog = [], activeExerciseState = null;
+    let alertCount = 0;
+    let activeLeg = 'Left', currentLang = 'en', voiceEnabled = false;
+    let latestSensorHealth = null, latestTelemetryFrame = null, analyticsChart = null, lastSpokenCue = '', lastSpeakAt = 0;
+    let stimPresets = [], stimDebounceTimer = null;
+    let browserBuzzerAudio = false, lastConditionState = 'initializing', lastBeepAt = 0, alarmAudioCtx = null;
+    const MAX_CHART_POINTS = 150;
+    const chartData = { labels: [], knee: [], heel: [], fore: [] };
+    let unifiedChart;
+
+    function esc(v) {
+      return String(v ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function showToast(msg, type = 'info') {
+      const wrap = document.getElementById('toastWrap');
+      if (!wrap) return;
+      const el = document.createElement('div');
+      el.className = `toast ${type}`;
+      el.textContent = msg;
+      wrap.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+
+    async function api(path, opts = {}) {
+      const res = await fetch(`${API_BASE}${path}`, { headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) }, ...opts });
+      if (!res.ok) throw new Error((await res.text()) || `HTTP ${res.status}`);
+      const ct = res.headers.get('content-type') || '';
+      return ct.includes('application/json') ? res.json() : res.text();
+    }
+
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // ==================== WebSocket ====================
+    function connectWebSocket() {
+      const url = `${WS_BASE}/ws/dashboard`;
+      setConnectionStatus('connecting');
+      try { ws = new WebSocket(url); } catch (e) { setConnectionStatus('disconnected'); return; }
+      ws.onopen = () => { connected = true; setConnectionStatus('connected'); startFPS(); };
+      ws.onmessage = (e) => {
+        try {
+          const msg = JSON.parse(e.data);
+          if (msg.type === 'data') handleSensorData(msg);
+          else if (msg.type === 'history' && Array.isArray(msg.frames)) applyHistoryFrames(msg.frames);
+          else if (msg.type === 'status') handleDeviceStatus(msg.data);
+          else if (msg.type === 'calStatus') handleCalStatus(msg);
+          else if (msg.type === 'calResult') handleCalResult(msg);
+          else if (msg.type === 'calReset') updateCalibrationUI(false, null, 0);
+          else if (msg.type === 'alertsCleared') renderEmptyAlerts();
+          else if (msg.type === 'bufferCleared') { resetChartBuffer(); liveSampleCount = 0; document.getElementById('dataCount').textContent = '0'; }
+          else if (msg.type === 'alert' && msg.alert) {
+            addAlert(msg.alert.severity || 'warning', msg.alert.message, msg.alert.created_at);
+            if (msg.alert.severity === 'critical') showToast(` CRITICAL: ${msg.alert.message}`, 'err');
+            else if (msg.alert.severity === 'warning') showToast(` Abnormal: ${msg.alert.message}`, 'warn');
+          }
+        } catch (err) { console.error(err); }
+      };
+      ws.onclose = () => {
+        connected = false; setConnectionStatus('disconnected');
+        if (autoReconnect) reconnectTimer = setTimeout(connectWebSocket, 2500);
+      };
+      ws.onerror = () => ws.close();
+    }
+
+    function resetChartBuffer() {
+      chartData.labels = []; chartData.knee = []; chartData.heel = []; chartData.fore = [];
+      if (unifiedChart) {
+        unifiedChart.data.labels = [];
+        unifiedChart.data.datasets.forEach(ds => ds.data = []);
+        unifiedChart.update('none');
+      }
+    }
+
+    function applyHistoryFrames(frames) {
+      resetChartBuffer();
+      frames.forEach(d => {
+        const kv = d.kneeAngleC !== undefined && d.kneeAngleC !== null ? d.kneeAngleC : d.kneeAngle;
+        chartData.labels.push(''); chartData.knee.push(kv); chartData.heel.push(d.fsrHeel); chartData.fore.push(d.fsrFore);
+      });
+      if (unifiedChart) {
+        unifiedChart.data.labels = chartData.labels;
+        unifiedChart.data.datasets[0].data = chartData.knee;
+        unifiedChart.data.datasets[1].data = chartData.heel;
+        unifiedChart.data.datasets[2].data = chartData.fore;
+        unifiedChart.update('none');
+      }
+      if (frames.length) {
+        liveSampleCount = frames.length;
+        handleSensorData(frames[frames.length - 1], true);
+      }
+    }
+
+    function setConnectionStatus(s) {
+      const el = document.getElementById('connStatus'), txt = document.getElementById('connText');
+      el.className = 'pill';
+      if (s === 'connected') { el.classList.add('pill-ok'); txt.textContent = BACKEND_MODE ? 'Backend Live' : 'ESP32 Direct'; }
+      else if (s === 'connecting') { el.classList.add('pill-warn'); txt.textContent = 'Connecting...'; }
+      else { el.classList.add('pill-err'); txt.textContent = 'Disconnected'; }
+    }
+
+    function handleDeviceStatus(st) {
+      const espEl = document.getElementById('espStatus'), espTxt = document.getElementById('espStatusText');
+      espEl.className = 'pill ' + (st.esp32_connected ? 'pill-ok' : 'pill-err');
+      espTxt.textContent = st.esp32_connected ? `${st.esp32_source || 'online'}` : 'ESP32 Offline';
+
+      if (st.lan_ips && st.lan_ips.length) {
+        document.getElementById('wsPushHint').textContent = `ws://${st.lan_ips[0]}:${location.port || 8000}/ws/esp32`;
+      }
+
+      simRunning = !!st.simulator_running;
+      const btnSim = document.getElementById('btnSim');
+      btnSim.textContent = simRunning ? 'Stop Stop Sim' : '▶ Start Sim';
+      btnSim.className = simRunning ? 'btn btn-rose btn-sm' : 'btn btn-teal btn-sm';
+      if (st.simulator_profile) document.getElementById('simProfile').value = st.simulator_profile;
+
+      activeSessionId = st.active_session_id || null;
+      const btnRec = document.getElementById('btnRecord');
+      if (activeSessionId) {
+        btnRec.textContent = `Stop Stop (#${activeSessionId})`;
+        btnRec.className = 'btn btn-rose btn-sm';
+        if (!sessionStart) { sessionStart = Date.now(); startSessionTimer(); }
+      } else {
+        btnRec.textContent = 'Rec Record Session';
+        btnRec.className = 'btn btn-green btn-sm';
+        stopSessionTimer(); sessionStart = null;
+        document.getElementById('sessionTimer').textContent = 'Idle';
+      }
+
+      const btnConn = document.getElementById('btnConnect');
+      btnConn.textContent = st.pull_bridge_target ? 'Disconnect Bridge' : 'Bridge ESP32 IP';
+      btnConn.className = st.pull_bridge_target ? 'btn btn-rose btn-sm' : 'btn btn-teal btn-sm';
+
+      if (st.active_patient_id && st.active_patient_id !== currentPatientId) {
+        currentPatientId = st.active_patient_id;
+        document.getElementById('patientSelect').value = String(currentPatientId);
+      }
+      if (st.active_leg) syncLegButtons(st.active_leg);
+      if (st.language && st.language !== currentLang) {
+        syncLangButtons(st.language);
+        loadExerciseCatalog(st.language);
+      } else if (st.language) {
+        syncLangButtons(st.language);
+      }
+      if (st.sensor_health) updateSensorHealth(st.sensor_health);
+      if (!st.esp32_connected && !st.simulator_running && !latestTelemetryFrame) {
+        updateSystemStatus(false, '', 'initializing');
+      }
+
+      currentCalibration = st.active_calibration || null;
+      updateCalibrationUI(!!st.calibrated, currentCalibration, st.calibration_step || 0);
+
+      if (st.thresholds) {
+        currentThresholds = st.thresholds;
+        document.getElementById('threshRangeHint').textContent = `Safe: ${currentThresholds.knee_angle_min}° to ${currentThresholds.knee_angle_max}°`;
+      }
+      if (st.ai_latest) updateAIRiskPanel(st.ai_latest);
+      updateExerciseUI(st.active_exercise || null);
+    }
+
+    // ==================== Controls ====================
+    async function toggleDeviceConnection() {
+      if (!BACKEND_MODE) {
+        if (connected && ws) { autoReconnect = false; ws.close(); } else connectWebSocket();
+        return;
+      }
+      const btn = document.getElementById('btnConnect');
+      if (btn.textContent.includes('Disconnect')) {
+        await api('/api/device/esp32/disconnect', { method: 'POST' });
+        showToast('Disconnected ESP32 bridge', 'warn');
+      } else {
+        const ip = document.getElementById('espIp').value.trim();
+        const port = parseInt(document.getElementById('espPort').value.trim() || '81', 10);
+        if (!ip) { showToast('Enter ESP32 IP first', 'err'); return; }
+        await api('/api/device/esp32/connect', { method: 'POST', body: JSON.stringify({ ip, port }) });
+        closeModal('connectModal');
+        showToast(`Connecting to ESP32 at ${ip}:${port}...`, 'info');
+      }
+    }
+
+    async function toggleSimulator() {
+      if (!BACKEND_MODE) { showToast('Start ./run_backend.sh to use the backend simulator.', 'warn'); return; }
+      if (simRunning) await api('/api/device/simulator/stop', { method: 'POST' });
+      else await api('/api/device/simulator/start', { method: 'POST', body: JSON.stringify({ profile: document.getElementById('simProfile').value, rate_hz: 10.0 }) });
+    }
+
+    async function toggleRecording() {
+      if (!BACKEND_MODE) { showToast('Recording requires the FastAPI backend.', 'warn'); return; }
+      if (activeSessionId) {
+        const stopped = await api(`/api/sessions/${activeSessionId}/stop`, { method: 'POST', body: JSON.stringify({}) });
+        showToast(`Saved Session #${stopped.id} (${stopped.sample_count} samples, Risk: ${stopped.oa_risk_score ?? '--'})`, 'ok');
+      } else {
+        const sel = document.getElementById('patientSelect');
+        const name = sel.selectedIndex > 0 ? sel.options[sel.selectedIndex].text.split(' (')[0] : 'Walk-in Patient';
+        const created = await api('/api/sessions/start', {
+          method: 'POST',
+          body: JSON.stringify({ patient_id: currentPatientId, patient_name: name, monitored_leg: activeLeg }),
+        });
+        showToast(`Recording Session #${created.id} (${activeLeg} leg)`, 'ok');
+      }
+    }
+
+    // ==================== Calibration ====================
+    function openCalModal() {
+      populatePerSensorInputs(currentCalibration);
+      document.getElementById('calModal').classList.add('active');
+    }
+    function openConnectModal() { document.getElementById('connectModal').classList.add('active'); }
+
+    function populatePerSensorInputs(cal) {
+      const c = cal || {};
+      document.getElementById('calThighP').value = Number(c.thigh_pitch_offset ?? c.thighPitchOffset ?? 0).toFixed(1);
+      document.getElementById('calThighR').value = Number(c.thigh_roll_offset ?? c.thighRollOffset ?? 0).toFixed(1);
+      document.getElementById('calThighPol').value = String(c.thigh_polarity ?? c.thighPolarity ?? 1);
+      document.getElementById('calShinP').value = Number(c.shin_pitch_offset ?? c.shinPitchOffset ?? 0).toFixed(1);
+      document.getElementById('calShinR').value = Number(c.shin_roll_offset ?? c.shinRollOffset ?? 0).toFixed(1);
+      document.getElementById('calShinPol').value = String(c.shin_polarity ?? c.shinPolarity ?? 1);
+      document.getElementById('calFlexStraight').value = String(c.flex_straight ?? c.flexStraight ?? 2048);
+      document.getElementById('calFlexBent').value = String(c.flex_bent ?? c.flexBent ?? 1200);
+      document.getElementById('calFsrHeelTare').value = String(c.fsr_heel_tare ?? c.fsrHeelTare ?? 0);
+      document.getElementById('calFsrForeTare').value = String(c.fsr_fore_tare ?? c.fsrForeTare ?? 0);
+    }
+
+    async function captureSensorCal(mode) {
+      const d = latestTelemetryFrame;
+      if (!d) {
+        showToast('Start Sim or connect ESP32 first to capture live sensor values.', 'warn');
+        return;
+      }
+      if (mode === 'imu_thigh') {
+        document.getElementById('calThighP').value = Number(d.thigh?.pitch ?? 0).toFixed(1);
+        document.getElementById('calThighR').value = Number(d.thigh?.roll ?? 0).toFixed(1);
+      } else if (mode === 'imu_shin') {
+        document.getElementById('calShinP').value = Number(d.shin?.pitch ?? 0).toFixed(1);
+        document.getElementById('calShinR').value = Number(d.shin?.roll ?? 0).toFixed(1);
+      } else if (mode === 'imu_shin_pol') {
+        const thighOff = parseFloat(document.getElementById('calThighP').value || '0');
+        const shinOff = parseFloat(document.getElementById('calShinP').value || '0');
+        const polT = parseInt(document.getElementById('calThighPol').value || '1', 10) || 1;
+        const dThigh = polT * ((d.thigh?.pitch ?? 0) - thighOff);
+        const dShin = (d.shin?.pitch ?? 0) - shinOff;
+        document.getElementById('calShinPol').value = (dShin - dThigh) >= 0 ? '1' : '-1';
+      } else if (mode === 'flex_0') {
+        document.getElementById('calFlexStraight').value = String(Math.round(d.flex ?? 2048));
+      } else if (mode === 'flex_90') {
+        document.getElementById('calFlexBent').value = String(Math.round(d.flex ?? 1200));
+      } else if (mode === 'fsr_heel') {
+        document.getElementById('calFsrHeelTare').value = String(Math.round(d.fsrHeel ?? 0));
+      } else if (mode === 'fsr_fore') {
+        document.getElementById('calFsrForeTare').value = String(Math.round(d.fsrFore ?? 0));
+      }
+      await applyPerSensorCalibration(mode);
+    }
+
+    async function applyPerSensorCalibration(label = '') {
+      if (!BACKEND_MODE) { showToast('Saving calibration requires the FastAPI backend.', 'warn'); return; }
+      const flexS = parseInt(document.getElementById('calFlexStraight').value || '2048', 10);
+      const flexB = parseInt(document.getElementById('calFlexBent').value || '1200', 10);
+      const payload = {
+        patient_id: currentPatientId,
+        thigh_pitch_offset: parseFloat(document.getElementById('calThighP').value || '0') || 0,
+        thigh_roll_offset: parseFloat(document.getElementById('calThighR').value || '0') || 0,
+        thigh_polarity: parseInt(document.getElementById('calThighPol').value || '1', 10) || 1,
+        shin_pitch_offset: parseFloat(document.getElementById('calShinP').value || '0') || 0,
+        shin_roll_offset: parseFloat(document.getElementById('calShinR').value || '0') || 0,
+        shin_polarity: parseInt(document.getElementById('calShinPol').value || '1', 10) || 1,
+        flex_straight: flexS,
+        flex_bent: flexB,
+        fsr_heel_tare: Math.max(0, parseInt(document.getElementById('calFsrHeelTare').value || '0', 10) || 0),
+        fsr_fore_tare: Math.max(0, parseInt(document.getElementById('calFsrForeTare').value || '0', 10) || 0),
+        is_two_point: Math.abs(flexB - flexS) >= 20,
+      };
+      const saved = await api('/api/device/calibration/apply', { method: 'POST', body: JSON.stringify(payload) });
+      currentCalibration = saved;
+      updateCalibrationUI(true, saved, saved.is_two_point ? 2 : 1);
+      if (saved.patient_id) loadPatients();
+      showToast(label ? `Calibrated & synced (${label})` : 'All 5 sensor calibrations saved & synced', 'ok');
+    }
+
+    async function autoCalibrateStanding() {
+      if (!BACKEND_MODE) { showToast('Auto calibration requires the FastAPI backend.', 'warn'); return; }
+      document.getElementById('calProgress').style.display = 'block';
+      document.getElementById('calProgressFill').style.width = '50%';
+      try {
+        const res = await api('/api/device/calibration/auto', {
+          method: 'POST',
+          body: JSON.stringify({ patient_id: currentPatientId, samples: 8 }),
+        });
+        document.getElementById('calProgress').style.display = 'none';
+        if (res.status === 'no_device') {
+          showToast(res.detail || 'Start Sim or connect ESP32 while patient stands straight (0°).', 'err');
+          return;
+        }
+        const cal = res.calibration;
+        currentCalibration = cal;
+        updateCalibrationUI(true, cal, cal.is_two_point ? 2 : 1);
+        if (cal.patient_id) loadPatients();
+        const warn = res.stability_spread_deg > 8.0 ? ` (note: leg moved ${res.stability_spread_deg}° during capture)` : '';
+        showToast(`Auto calibrated 0° from ${res.samples_used} standing samples${warn}`, res.stability_spread_deg > 8.0 ? 'warn' : 'ok');
+      } catch (e) {
+        document.getElementById('calProgress').style.display = 'none';
+        showToast(`Auto calibration failed: ${e.message}`, 'err');
+      }
+    }
+
+    async function requestCalibration(step) {
+      if (step === 'reset') {
+        if (BACKEND_MODE) await api('/api/device/calibrate', { method: 'POST', body: JSON.stringify({ step: 'reset' }) });
+        showToast('Calibration reset', 'warn');
+        return;
+      }
+      showToast(step === 'step1' ? 'Step 1: Hold leg straight (0°)...' : 'Step 2: Bend knee ~90°...', 'info');
+      document.getElementById('calProgress').style.display = 'block';
+      document.getElementById('calProgressFill').style.width = '10%';
+      if (BACKEND_MODE) {
+        const res = await api('/api/device/calibrate', { method: 'POST', body: JSON.stringify({ step, patient_id: currentPatientId }) });
+        if (res.status === 'no_device') {
+          document.getElementById('calProgress').style.display = 'none';
+          showToast('Start Sim or connect ESP32 before calibrating.', 'err');
+        }
+      }
+    }
+
+    function handleCalStatus(msg) {
+      document.getElementById('calProgress').style.display = 'block';
+      document.getElementById('calProgressFill').style.width = `${msg.progress || 0}%`;
+    }
+
+    function handleCalResult(msg) {
+      document.getElementById('calProgress').style.display = 'none';
+      const cal = msg.calibration || msg;
+      currentCalibration = cal;
+      updateCalibrationUI(true, cal, msg.step || (cal.is_two_point || cal.isTwoPoint ? 2 : 1));
+      showToast('Calibration saved!', 'ok');
+      if (BACKEND_MODE) loadPatients();
+    }
+
+    function updateCalibrationUI(calibrated, cal, step) {
+      document.getElementById('calProgress').style.display = 'none';
+      const btnTxt = document.getElementById('calBadgeText');
+      const lbl = document.getElementById('calStatusLabel');
+      const offsets = document.getElementById('calOffsets');
+      const hint = document.getElementById('calHintText');
+      if (calibrated && cal) {
+        const twoPt = step >= 2 || cal.is_two_point || cal.isTwoPoint;
+        btnTxt.textContent = twoPt ? 'Calibrated (2-Pt)' : 'Calibrated (1-Pt)';
+        lbl.textContent = twoPt ? ' 2-Point Calibrated (0° + 90°)' : ' 1-Point Calibrated (0°)';
+        lbl.style.color = '#059669';
+        hint.textContent = twoPt ? 'Calibrated 0° + 90° ROM' : 'Calibrated 0° baseline';
+        const tp = cal.thigh_pitch_offset ?? cal.thighPitchOffset ?? 0;
+        const sp = cal.shin_pitch_offset ?? cal.shinPitchOffset ?? 0;
+        const fs = cal.flex_straight ?? cal.flexStraight ?? 2048;
+        const fb = cal.flex_bent ?? cal.flexBent ?? 1200;
+        const ht = cal.fsr_heel_tare ?? cal.fsrHeelTare ?? 0;
+        const ft = cal.fsr_fore_tare ?? cal.fsrForeTare ?? 0;
+        offsets.textContent = `Thigh P:${Number(tp).toFixed(1)}° | Shin P:${Number(sp).toFixed(1)}° | Flex [${fs}→${fb}] | FSR Tare [${ht}/${ft}]`;
+        populatePerSensorInputs(cal);
+      } else {
+        btnTxt.textContent = 'Calibrate';
+        lbl.textContent = 'Not Calibrated';
+        lbl.style.color = '#e11d48';
+        hint.textContent = '0° = straight standing';
+        offsets.textContent = 'No calibration offsets saved yet.';
+        populatePerSensorInputs(null);
+      }
+    }
+
+    // ==================== Patients ====================
+    async function loadPatients() {
+      if (!BACKEND_MODE) return;
+      allPatients = await api('/api/patients');
+      const sel = document.getElementById('patientSelect');
+      sel.innerHTML = '<option value="">— Walk-in Patient —</option>';
+      allPatients.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = String(p.id);
+        opt.textContent = `${p.name} (${p.age || '?'}y, ${p.monitored_leg})${p.active_calibration ? ' ' : ''}`;
+        sel.appendChild(opt);
+      });
+      if (currentPatientId) sel.value = String(currentPatientId);
+    }
+
+    async function onPatientSelect() {
+      const val = document.getElementById('patientSelect').value;
+      if (!val) {
+        currentPatientId = null;
+        currentCalibration = null;
+        updateCalibrationUI(false, null, 0);
+        if (BACKEND_MODE) await api('/api/patients/unselect', { method: 'POST' });
+        return;
+      }
+      const p = await api(`/api/patients/${parseInt(val, 10)}/select`, { method: 'POST' });
+      currentPatientId = p.id;
+      syncLegButtons(p.monitored_leg || 'Left');
+      currentCalibration = p.active_calibration || null;
+      updateCalibrationUI(!!currentCalibration, currentCalibration, currentCalibration?.is_two_point ? 2 : 1);
+    }
+
+    async function openPatientDB() {
+      await loadPatients();
+      const c = document.getElementById('patientListContainer');
+      c.innerHTML = !allPatients.length
+        ? '<div style="text-align:center;color:var(--text-muted);padding:16px">No patients yet. Click "+ New Patient".</div>'
+        : allPatients.map(p => `
+      <div class="modal-item ${p.id === currentPatientId ? 'active' : ''}" onclick="selectPatientModal(${p.id})">
+        <div>
+          <strong style="font-size:13px">${esc(p.name)}</strong>
+          <div style="font-size:11px;color:var(--text-muted)">Age ${esc(p.age || '?')} · ${esc(p.gender)} · ${esc(p.monitored_leg)} leg · ${esc(p.region_district || 'NER')} · ${p.session_count} sessions</div>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="tier-badge ${p.active_calibration ? 'tier-Low' : 'tier-Pending'}">${p.active_calibration ? ' Calibrated' : 'No Cal'}</span>
+          <button class="btn btn-soft btn-sm" onclick="event.stopPropagation();editPatientModal(${p.id})">Edit</button>
+          <button class="btn btn-rose btn-sm" onclick="event.stopPropagation();deletePatientById(${p.id})">Del</button>
+        </div>
+      </div>`).join('');
+      document.getElementById('patientModal').classList.add('active');
+    }
+
+    function openNewPatientForm() {
+      document.getElementById('patientFormTitle').textContent = 'Register New Patient';
+      document.getElementById('editPatientId').value = '';
+      ['npName', 'npAge', 'npHeight', 'npWeight', 'npDistrict', 'npNotes'].forEach(k => document.getElementById(k).value = '');
+      document.getElementById('newPatientForm').style.display = 'block';
+    }
+
+    function closePatientForm() {
+      document.getElementById('newPatientForm').style.display = 'none';
+      document.getElementById('editPatientId').value = '';
+    }
+
+    function editPatientModal(id) {
+      const p = allPatients.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('patientFormTitle').textContent = `Edit Patient: ${p.name}`;
+      document.getElementById('editPatientId').value = String(p.id);
+      document.getElementById('npName').value = p.name || '';
+      document.getElementById('npAge').value = p.age || '';
+      document.getElementById('npGender').value = p.gender || 'Male';
+      document.getElementById('npLeg').value = p.monitored_leg || 'Left';
+      document.getElementById('npHeight').value = p.height_cm || '';
+      document.getElementById('npWeight').value = p.weight_kg || '';
+      document.getElementById('npDistrict').value = p.region_district || '';
+      document.getElementById('npNotes').value = p.notes || '';
+      document.getElementById('newPatientForm').style.display = 'block';
+    }
+
+    async function selectPatientModal(id) {
+      document.getElementById('patientSelect').value = String(id);
+      await onPatientSelect();
+      closeModal('patientModal');
+    }
+
+    async function savePatientForm() {
+      const name = document.getElementById('npName').value.trim();
+      if (!name) { showToast('Enter patient name', 'err'); return; }
+      const payload = {
+        name,
+        age: parseInt(document.getElementById('npAge').value, 10) || null,
+        gender: document.getElementById('npGender').value,
+        monitored_leg: document.getElementById('npLeg').value,
+        height_cm: parseFloat(document.getElementById('npHeight').value) || null,
+        weight_kg: parseFloat(document.getElementById('npWeight').value) || null,
+        region_district: document.getElementById('npDistrict').value.trim(),
+        notes: document.getElementById('npNotes').value.trim(),
+      };
+      const editId = document.getElementById('editPatientId').value;
+      if (editId) {
+        await api(`/api/patients/${editId}`, { method: 'PATCH', body: JSON.stringify(payload) });
+        if (currentPatientId === parseInt(editId, 10)) syncLegButtons(payload.monitored_leg);
+        showToast(`Updated ${name}`, 'ok');
+      } else {
+        const created = await api('/api/patients', { method: 'POST', body: JSON.stringify(payload) });
+        currentPatientId = created.id;
+        await api(`/api/patients/${created.id}/select`, { method: 'POST' });
+        syncLegButtons(created.monitored_leg || payload.monitored_leg);
+        showToast(`Registered ${name}`, 'ok');
+      }
+      closePatientForm();
+      await loadPatients();
+      await openPatientDB();
+    }
+
+    async function deletePatientById(id) {
+      await api(`/api/patients/${id}`, { method: 'DELETE' });
+      if (currentPatientId === id) currentPatientId = null;
+      await openPatientDB();
+    }
+
+    function filterPatients() {
+      const q = document.getElementById('patientSearch').value.toLowerCase();
+      document.querySelectorAll('#patientListContainer .modal-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+
+    // ==================== Sessions & Thresholds ====================
+    async function openSessionHistory() {
+      const sessions = await api('/api/sessions');
+      const c = document.getElementById('sessionListContainer');
+      c.innerHTML = !sessions.length
+        ? '<div style="text-align:center;color:var(--text-muted);padding:16px">No recorded sessions yet.</div>'
+        : sessions.map(s => `
+      <div class="modal-item" style="cursor:default">
+        <div>
+          <strong style="font-size:13px">#${s.id} ${esc(s.patient_name)} <span class="tier-badge tier-Pending">${esc(s.monitored_leg || 'Left')}</span></strong>
+          <div style="font-size:11px;color:var(--text-muted)">${new Date(s.start_time).toLocaleString()} · ${s.sample_count} samples · ROM ${s.rom_deg ?? '--'}° · Risk ${s.oa_risk_score ?? '--'} (${esc(s.oa_risk_tier || 'Pending')})</div>
+        </div>
+        <div style="display:flex;gap:5px">
+          <a class="btn btn-soft btn-sm" style="text-decoration:none" href="${API_BASE}/api/sessions/${s.id}/export/csv">CSV</a>
+          <a class="btn btn-soft btn-sm" style="text-decoration:none" href="${API_BASE}/api/sessions/${s.id}/export/json">JSON</a>
+          <button class="btn btn-rose btn-sm" onclick="deleteSessionById(${s.id})">Del</button>
+        </div>
+      </div>`).join('');
+      document.getElementById('sessionModal').classList.add('active');
+    }
+
+    async function deleteSessionById(id) {
+      await api(`/api/sessions/${id}`, { method: 'DELETE' });
+      await openSessionHistory();
+    }
+
+    async function openRefModal() {
+      document.getElementById('refModal').classList.add('active');
+      if (!BACKEND_MODE) return;
+      try {
+        const res = await api('/api/analytics/references');
+        const refs = res.references || [];
+        document.getElementById('refTableBody').innerHTML = refs.map(r => `
+      <tr>
+        <td><strong>${esc(r.parameter)}</strong></td>
+        <td style="color:#059669">${esc(r.healthy)}</td>
+        <td style="color:#e11d48">${esc(r.oa_threshold)}</td>
+        <td style="color:var(--text-muted)">${esc(r.source)}</td>
+      </tr>`).join('');
+      } catch (e) {
+        document.getElementById('refTableBody').innerHTML = '<tr><td colspan="4">Could not load references.</td></tr>';
+      }
+    }
+
+    function openThresholdModal() {
+      document.getElementById('thKneeMin').value = currentThresholds.knee_angle_min;
+      document.getElementById('thKneeMax').value = currentThresholds.knee_angle_max;
+      document.getElementById('thFsrImb').value = currentThresholds.fsr_imbalance_thresh;
+      document.getElementById('thFlexStiff').value = currentThresholds.flex_stiff_thresh;
+      document.getElementById('thAutoRecord').checked = !!currentThresholds.auto_record_on_stream;
+      document.getElementById('thresholdModal').classList.add('active');
+    }
+
+    async function saveThresholds() {
+      currentThresholds = await api('/api/device/thresholds', {
+        method: 'PUT',
+        body: JSON.stringify({
+          knee_angle_min: parseFloat(document.getElementById('thKneeMin').value),
+          knee_angle_max: parseFloat(document.getElementById('thKneeMax').value),
+          fsr_imbalance_thresh: parseFloat(document.getElementById('thFsrImb').value),
+          flex_stiff_thresh: parseFloat(document.getElementById('thFlexStiff').value),
+          auto_record_on_stream: document.getElementById('thAutoRecord').checked,
+        }),
+      });
+      closeModal('thresholdModal');
+      showToast('Thresholds saved and synced to ESP32', 'ok');
+    }
+
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    // ==================== Telemetry & Visuals ====================
+    function handleSensorData(d, skipChartAppend = false) {
+      latestTelemetryFrame = d;
+      if (!skipChartAppend) {
+        msgCount++;
+        liveSampleCount++;
+      }
+      const rt = document.getElementById('calRawThigh');
+      if (rt) {
+        rt.textContent = `P:${Number(d.thigh?.pitch ?? 0).toFixed(1)}° R:${Number(d.thigh?.roll ?? 0).toFixed(1)}°`;
+        document.getElementById('calRawShin').textContent = `P:${Number(d.shin?.pitch ?? 0).toFixed(1)}° R:${Number(d.shin?.roll ?? 0).toFixed(1)}°`;
+        document.getElementById('calRawFlex').textContent = `ADC:${d.flex ?? '--'}`;
+        document.getElementById('calRawHeel').textContent = `H:${d.fsrHeel ?? '--'}`;
+        document.getElementById('calRawFore').textContent = `F:${d.fsrFore ?? '--'}`;
+      }
+      const kneeVal = d.kneeAngleC !== undefined && d.kneeAngleC !== null ? d.kneeAngleC : d.kneeAngle;
+      const bio = d.biomechanics || {};
+
+      document.getElementById('valKneeAngle').textContent = `${kneeVal.toFixed(1)}°`;
+      document.getElementById('valImbalance').textContent = `${d.fsrImbalance.toFixed(1)}%`;
+      document.getElementById('heelPercent').textContent = `${bio.heelPct ?? 50}%`;
+      document.getElementById('forePercent').textContent = `${bio.forePct ?? 50}%`;
+
+      updateSystemStatus(d.abnormal, d.reason, d.condition || (d.critical ? 'critical' : (d.abnormal ? 'abnormal' : 'normal')));
+      updateIMU('t', d.thigh);
+      updateIMU('s', d.shin);
+      if (d.sensorHealth) updateSensorHealth(d.sensorHealth);
+      drawFullLegSimulation(d);
+      drawJointAngleGauge(kneeVal, d.flexNorm ?? Math.max(0, Math.min(1.2, kneeVal / 90)));
+      updateFootPressureMeter(bio.footPressure || null, d.fsrHeel ?? 0, d.fsrFore ?? 0, bio.heelPct ?? 50, bio.forePct ?? 50, d.fsrImbalance ?? 0);
+      if (!skipChartAppend) updateCharts(kneeVal, d);
+      if (d.aiRisk) updateAIRiskPanel(d.aiRisk);
+      if (d.exercise) updateExerciseUI(d.exercise);
+
+      document.getElementById('dataCount').textContent = String(liveSampleCount);
+      document.getElementById('alertCount').textContent = String(alertCount);
+    }
+
+    function updateAIRiskPanel(ai) {
+      const big = document.getElementById('aiBigScore');
+      const tierEl = document.getElementById('aiTierBadge');
+      const conf = document.getElementById('aiConfidence');
+      const needle = document.getElementById('riskNeedle');
+      const imuPaused = (latestSensorHealth && latestSensorHealth.imu_ready === false)
+        || (Array.isArray(ai.markers) && ai.markers[0] && ai.markers[0].startsWith('Paused:'));
+
+      if (imuPaused) {
+        big.textContent = '--';
+        big.style.color = 'var(--amber)';
+        tierEl.className = 'tier-badge tier-Moderate';
+        tierEl.textContent = 'IMU Paused';
+        conf.textContent = 'Check IMU wiring';
+        needle.style.transform = 'rotate(-90deg)';
+      } else if (!ai.ready) {
+        big.textContent = '--';
+        big.style.color = 'var(--teal)';
+        tierEl.className = 'tier-badge tier-Pending';
+        tierEl.textContent = 'Warming up';
+        conf.textContent = `Window: ${ai.window_samples}/15`;
+        needle.style.transform = 'rotate(-90deg)';
+      } else {
+        big.textContent = ai.oa_risk_score.toFixed(1);
+        tierEl.className = `tier-badge tier-${ai.oa_risk_tier}`;
+        tierEl.textContent = `${ai.oa_risk_tier} Risk`;
+        conf.textContent = `Confidence: ${(ai.confidence * 100).toFixed(0)}%`;
+        big.style.color = ai.oa_risk_tier === 'High' ? 'var(--rose)' : ai.oa_risk_tier === 'Moderate' ? 'var(--amber)' : 'var(--green)';
+        needle.style.transform = `rotate(${(-90 + Math.max(0, Math.min(100, ai.oa_risk_score)) * 1.8).toFixed(1)}deg)`;
+      }
+
+      const f = ai.features || {};
+      document.getElementById('aiRom').textContent = `${(f.rom_deg ?? 0).toFixed(1)}°`;
+      document.getElementById('aiExtDef').textContent = `${(f.extension_deficit_deg ?? 0).toFixed(1)}°`;
+      document.getElementById('aiVarusVel').textContent = `${(f.varus_vel_dps ?? 0).toFixed(1)} °/s`;
+      document.getElementById('aiVel').textContent = `${(f.mean_angular_vel_dps ?? 0).toFixed(0)} °/s`;
+      document.getElementById('aiStiff').textContent = `${(f.flex_stiffness_index ?? 0).toFixed(2)}`;
+      document.getElementById('aiCadence').textContent = `${(f.cadence_spm ?? 0).toFixed(0)}`;
+      document.getElementById('aiStance').textContent = `${(f.stance_pct ?? 0).toFixed(0)}%`;
+
+      const rd = ai.risk_drivers || {};
+      const setBar = (id, pct) => {
+        const v = Math.max(0, Math.min(100, Math.round(pct || 0)));
+        document.getElementById(`${id}Val`).textContent = `${v}%`;
+        document.getElementById(`${id}Fill`).style.width = `${v}%`;
+      };
+      setBar('rbRom', rd.rom_deficit_pct);
+      setBar('rbStiff', rd.stiffness_pct);
+      setBar('rbAsym', rd.asymmetry_pct);
+      setBar('rbJerk', rd.jerk_wobble_pct);
+
+      const markers = ai.markers || [];
+      if (markers.length) {
+        document.getElementById('aiMarkers').innerHTML = markers.map(m => {
+          const warn = !m.toLowerCase().includes('healthy') && !m.toLowerCase().includes('collecting');
+          return `<span class="marker-chip ${warn ? 'warn' : ''}">${esc(m)}</span>`;
+        }).join('');
+      }
+    }
+
+    function toggleBrowserBuzzer() {
+      browserBuzzerAudio = !browserBuzzerAudio;
+      const btn = document.getElementById('btnBuzzerAudio');
+      btn.textContent = browserBuzzerAudio ? ' Alarm On' : ' Alarm';
+      btn.className = browserBuzzerAudio ? 'btn btn-rose btn-sm' : 'btn btn-soft btn-sm';
+      if (browserBuzzerAudio && (lastConditionState === 'abnormal' || lastConditionState === 'critical')) {
+        playAlertTone(lastConditionState === 'critical');
+      }
+    }
+
+    function playAlertTone(isCritical) {
+      if (!browserBuzzerAudio) return;
+      const now = Date.now();
+      if (now - lastBeepAt < 1800) return;
+      lastBeepAt = now;
+      try {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return;
+        if (!alarmAudioCtx) alarmAudioCtx = new Ctx();
+        const osc = alarmAudioCtx.createOscillator();
+        const gain = alarmAudioCtx.createGain();
+        osc.type = isCritical ? 'square' : 'triangle';
+        osc.frequency.value = isCritical ? 980 : 720;
+        gain.gain.setValueAtTime(0.08, alarmAudioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, alarmAudioCtx.currentTime + (isCritical ? 0.35 : 0.2));
+        osc.connect(gain);
+        gain.connect(alarmAudioCtx.destination);
+        osc.start();
+        osc.stop(alarmAudioCtx.currentTime + (isCritical ? 0.36 : 0.22));
+      } catch (e) { /* audio context blocked or unavailable */ }
+    }
+
+    function updateSystemStatus(abnormal, reason, condition = null) {
+      const s = document.getElementById('systemStatus'), i = document.getElementById('statusIcon'),
+        t = document.getElementById('statusTitle'), r = document.getElementById('statusReason'),
+        g = document.getElementById('greenLed'), rd = document.getElementById('redLed'), b = document.getElementById('buzzerIcon');
+      const state = condition || (abnormal ? 'abnormal' : 'normal');
+      lastConditionState = state;
+
+      if (state === 'initializing') {
+        s.className = 'status-bar initializing'; i.textContent = '⏳';
+        t.textContent = 'Device Initializing';
+        r.textContent = reason || 'Waiting for ESP32 WiFi or Simulator stream (Green LED blinking, Red & Buzzer OFF).';
+        g.className = 'led-dot green-blink'; rd.className = 'led-dot'; b.textContent = ' OFF';
+      } else if (state === 'critical') {
+        s.className = 'status-bar critical'; i.textContent = '';
+        t.textContent = 'CRITICAL Condition Detected'; r.textContent = reason || 'High OA risk / multiple abnormal thresholds exceeded';
+        g.className = 'led-dot'; rd.className = 'led-dot red'; b.textContent = ' ON';
+        playAlertTone(true);
+      } else if (state === 'abnormal' || abnormal) {
+        s.className = 'status-bar abnormal'; i.textContent = '';
+        t.textContent = 'Abnormal Movement Pattern'; r.textContent = reason || 'Threshold exceeded';
+        g.className = 'led-dot'; rd.className = 'led-dot red'; b.textContent = ' ON';
+        playAlertTone(false);
+      } else {
+        s.className = 'status-bar normal'; i.textContent = '';
+        t.textContent = 'Normal Movement'; r.textContent = 'All joint and foot pressure parameters are calm and within limits.';
+        g.className = 'led-dot green'; rd.className = 'led-dot'; b.textContent = ' OFF';
+      }
+    }
+
+    function addAlert(severity, message, isoTime) {
+      const ts = isoTime ? new Date(isoTime).toLocaleTimeString() : new Date().toLocaleTimeString();
+      alertCount++;
+      const list = document.getElementById('alertList');
+      if (list.children.length === 1 && list.textContent.includes('No alerts')) list.innerHTML = '';
+      const color = (severity === 'critical' || severity === 'high') ? 'var(--rose)' : severity === 'recovery' ? 'var(--green)' : 'var(--amber)';
+      const tag = severity === 'critical' ? '<span class="tier-badge tier-High" style="margin-right:6px">CRITICAL</span>'
+        : severity === 'warning' ? '<span class="tier-badge tier-Moderate" style="margin-right:6px">ABNORMAL</span>'
+          : severity === 'recovery' ? '<span class="tier-badge tier-Low" style="margin-right:6px">NORMAL</span>' : '';
+      const row = document.createElement('div');
+      row.className = 'list-row';
+      row.innerHTML = `<span><strong style="color:${color}">●</strong> &nbsp;${tag}${esc(message)}</span><span style="color:var(--text-muted);font-family:monospace">${esc(ts)}</span>`;
+      list.insertBefore(row, list.firstChild);
+      if (list.children.length > 80) list.removeChild(list.lastChild);
+      document.getElementById('alertCount').textContent = String(alertCount);
+    }
+    function renderEmptyAlerts() {
+      alertCount = 0;
+      document.getElementById('alertList').innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:18px;font-size:12px">No alerts yet — all parameters calm.</div>';
+      document.getElementById('alertCount').textContent = '0';
+    }
+    async function clearAlerts() {
+      await api('/api/alerts', { method: 'DELETE' });
+      renderEmptyAlerts();
+      showToast('Alerts cleared from database', 'ok');
+    }
+
+    function updateIMU(p, imu) {
+      document.getElementById(`${p}_ax`).textContent = imu.ax.toFixed(3);
+      document.getElementById(`${p}_ay`).textContent = imu.ay.toFixed(3);
+      document.getElementById(`${p}_az`).textContent = imu.az.toFixed(3);
+      document.getElementById(`${p}_gx`).textContent = imu.gx.toFixed(1);
+      document.getElementById(`${p}_gy`).textContent = imu.gy.toFixed(1);
+      document.getElementById(`${p}_gz`).textContent = imu.gz.toFixed(1);
+      document.getElementById(`${p}_pitchC`).textContent = `P: ${(imu.pitchC ?? imu.pitch).toFixed(1)}°`;
+      document.getElementById(`${p}_rollC`).textContent = `R: ${(imu.rollC ?? imu.roll).toFixed(1)}°`;
+    }
+
+    // ==================== Full-Leg All-Sensor Real-Time Simulation ====================
+    function drawFullLegSimulation(d) {
+      const canvas = document.getElementById('legCanvas');
+      if (!canvas) return;
+
+      // Crisp HiDPI backing resolution synced to logical 540x350 anatomical stage
+      const logicalW = 540, logicalH = 350;
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      if (canvas.width !== logicalW * dpr || canvas.height !== logicalH * dpr) {
+        canvas.width = logicalW * dpr;
+        canvas.height = logicalH * dpr;
+      }
+      const ctx = canvas.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const w = logicalW, h = logicalH;
+      ctx.clearRect(0, 0, w, h);
+
+      const flexion = d ? (d.kneeAngleC ?? d.kneeAngle ?? 0) : 0;
+      const thigh = d ? d.thigh : { pitchC: 0, rollC: 0, gx: 0, online: true };
+      const shin = d ? d.shin : { pitchC: 0, rollC: 0, gx: 0, online: true };
+      const thighPitch = thigh.pitchC ?? thigh.pitch ?? 0;
+      const shinPitch = shin.pitchC ?? shin.pitch ?? 0;
+      const thighRoll = thigh.rollC ?? thigh.roll ?? 0;
+      const shinRoll = shin.rollC ?? shin.roll ?? 0;
+      const flexAdc = d ? (d.flex ?? 2048) : 2048;
+      const flexNorm = d && d.flexNorm !== undefined && d.flexNorm !== null ? d.flexNorm : Math.max(0, Math.min(1.3, flexion / 90));
+      const flexEstDeg = flexNorm * 90.0;
+      const heel = d ? (d.fsrHeel ?? 0) : 0;
+      const fore = d ? (d.fsrFore ?? 0) : 0;
+      const aiScore = d && d.aiRisk && d.aiRisk.ready ? d.aiRisk.oa_risk_score : 0;
+      const sh = (d && d.sensorHealth && d.sensorHealth.sensors) || (latestSensorHealth && latestSensorHealth.sensors) || {};
+      const netRoll = Math.max(-25, Math.min(25, (d && d.biomechanics && d.biomechanics.netRollDeg !== undefined) ? d.biomechanics.netRollDeg : (shinRoll - thighRoll)));
+
+      if (d) {
+        const bio = d.biomechanics || {};
+        const hPct = bio.heelPct ?? 50;
+        const fPct = bio.forePct ?? 50;
+        const fPctRom = bio.flexPct ?? Math.round(flexNorm * 100);
+        document.getElementById('fuseThigh').textContent = `P:${thighPitch.toFixed(0)}° R:${thighRoll.toFixed(0)}°`;
+        document.getElementById('fuseShin').textContent = `P:${shinPitch.toFixed(0)}° R:${shinRoll.toFixed(0)}°`;
+        document.getElementById('fuseFlex').textContent = `${flexAdc} (${fPctRom}%)`;
+        document.getElementById('fuseHeel').textContent = `${heel} (${hPct}%)`;
+        document.getElementById('fuseFore').textContent = `${fore} (${fPct}%)`;
+      }
+
+      // Kinematics (0° thigh & 0° flexion = straight vertical; positive thighPitch swings forward +X; positive flexion bends shin back -X)
+      const hipX = 205, hipY = 56, tLen = 112, sLen = 112;
+      const tRad = (Math.max(-35, Math.min(88, thighPitch)) * Math.PI) / 180;
+      const fRad = (Math.max(-25, Math.min(155, flexion)) * Math.PI) / 180;
+      const kX = hipX + tLen * Math.sin(tRad);
+      const kY = hipY + tLen * Math.cos(tRad);
+      const sRad = tRad - fRad;
+      const aX = kX + sLen * Math.sin(sRad);
+      const aY = kY + sLen * Math.cos(sRad);
+
+      // Subtle clinical lab floor & grid
+      const floorY = Math.max(aY + 26, h - 42);
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+      ctx.lineWidth = 1;
+      for (let gx = 40; gx <= w - 40; gx += 45) {
+        ctx.beginPath(); ctx.moveTo(gx, 24); ctx.lineTo(gx, floorY); ctx.stroke();
+      }
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.moveTo(24, floorY); ctx.lineTo(w - 24, floorY); ctx.stroke();
+
+      // Status colors
+      const romOk = flexion >= currentThresholds.knee_angle_min && flexion <= currentThresholds.knee_angle_max;
+      const riskCol = aiScore > 65 ? '#e11d48' : aiScore > 35 ? '#d97706' : '#0d9488';
+      const imuThighCol = sh.imu_thigh?.status === 'fault' ? '#e11d48' : sh.imu_thigh?.status === 'warn' ? '#d97706' : '#0d9488';
+      const imuShinCol = sh.imu_shin?.status === 'fault' ? '#e11d48' : sh.imu_shin?.status === 'warn' ? '#d97706' : '#2563eb';
+      const flexCol = sh.flex?.status === 'fault' ? '#e11d48' : (flexNorm < 0.15 && flexion > 35 ? '#e11d48' : '#d97706');
+
+      // Target exercise ROM wedge at knee
+      if (activeExerciseState && activeExerciseState.active) {
+        const aMin = Math.PI / 2 - (tRad - (activeExerciseState.target_min_deg * Math.PI) / 180);
+        const aMax = Math.PI / 2 - (tRad - (activeExerciseState.target_max_deg * Math.PI) / 180);
+        ctx.save();
+        ctx.beginPath(); ctx.moveTo(kX, kY);
+        ctx.arc(kX, kY, 64, Math.min(aMin, aMax), Math.max(aMin, aMax));
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(13, 148, 136, 0.12)';
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Pelvis / Hip silhouette
+      ctx.save();
+      ctx.fillStyle = '#cbd5e1';
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(hipX - 28, hipY - 14, 56, 18, 9);
+      ctx.fill(); ctx.stroke();
+      ctx.restore();
+
+      // 1) Anatomical Tapered Thigh Segment (local frame: +Y down along femur, +X anterior quad, -X posterior hamstring)
+      ctx.save();
+      ctx.translate(hipX, hipY);
+      ctx.rotate(-tRad);
+      const tGrad = ctx.createLinearGradient(-22, 0, 24, 0);
+      tGrad.addColorStop(0, '#cfdcd9');
+      tGrad.addColorStop(0.55, '#eef5f3');
+      tGrad.addColorStop(1, '#c3d6d2');
+      ctx.fillStyle = tGrad;
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(-19, 0);
+      ctx.bezierCurveTo(-21, tLen * 0.35, -16, tLen * 0.72, -12, tLen);
+      ctx.lineTo(13, tLen);
+      ctx.bezierCurveTo(21, tLen * 0.65, 25, tLen * 0.28, 21, 0);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+
+      // Femur shaft + strap band
+      ctx.strokeStyle = romOk ? 'rgba(13,148,136,0.45)' : 'rgba(225,29,72,0.55)';
+      ctx.lineWidth = 4.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(0, 4); ctx.lineTo(0, tLen - 4); ctx.stroke();
+      ctx.fillStyle = '#334155';
+      ctx.fillRect(-19, tLen * 0.44 - 4, 39, 8);
+      ctx.restore();
+
+      // 2) Anatomical Tapered Shin / Calf Segment (local frame: +Y down tibia, +X anterior crest, -X calf belly)
+      ctx.save();
+      ctx.translate(kX, kY);
+      ctx.rotate(-sRad);
+      const sGrad = ctx.createLinearGradient(-18, 0, 14, 0);
+      sGrad.addColorStop(0, '#c8d6e5');
+      sGrad.addColorStop(0.55, '#edf2f7');
+      sGrad.addColorStop(1, '#cbd5e1');
+      ctx.fillStyle = sGrad;
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.moveTo(-12, 0);
+      ctx.bezierCurveTo(-20, sLen * 0.28, -17, sLen * 0.56, -7.5, sLen);
+      ctx.lineTo(7, sLen);
+      ctx.bezierCurveTo(9.5, sLen * 0.62, 12.5, sLen * 0.25, 12, 0);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+
+      // Tibia shaft + shin strap
+      ctx.strokeStyle = romOk ? 'rgba(37,99,235,0.45)' : 'rgba(225,29,72,0.55)';
+      ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(0, 4); ctx.lineTo(0, sLen - 4); ctx.stroke();
+      ctx.fillStyle = '#334155';
+      ctx.fillRect(-16, sLen * 0.48 - 4, 27, 8);
+      ctx.restore();
+
+      // 3) Knee Synovial Stress Glow & Anatomical Patella (Kneecap)
+      const haloR = 20 + (aiScore / 100) * 16;
+      const kGrad = ctx.createRadialGradient(kX, kY, 4, kX, kY, haloR);
+      kGrad.addColorStop(0, aiScore > 65 ? 'rgba(225,29,72,0.30)' : aiScore > 35 ? 'rgba(217,119,6,0.26)' : 'rgba(13,148,136,0.22)');
+      kGrad.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = kGrad;
+      ctx.beginPath(); ctx.arc(kX, kY, haloR, 0, 2 * Math.PI); ctx.fill();
+
+      const midRad = (tRad + sRad) / 2;
+      const patX = kX + 13 * Math.cos(midRad);
+      const patY = kY - 13 * Math.sin(midRad);
+      ctx.save();
+      ctx.translate(patX, patY);
+      ctx.rotate(-midRad);
+      ctx.fillStyle = '#ffffff';
+      ctx.strokeStyle = riskCol;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.ellipse(0, 0, 5.5, 8, 0, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+      ctx.restore();
+
+      // Knee & Hip & Ankle bone joint centers
+      ctx.beginPath(); ctx.arc(hipX, hipY, 6, 0, 2 * Math.PI); ctx.fillStyle = '#64748b'; ctx.fill();
+      ctx.beginPath(); ctx.arc(kX, kY, 7, 0, 2 * Math.PI); ctx.fillStyle = riskCol; ctx.fill();
+      ctx.beginPath(); ctx.arc(kX, kY, 3, 0, 2 * Math.PI); ctx.fillStyle = '#ffffff'; ctx.fill();
+      ctx.beginPath(); ctx.arc(aX, aY, 5.5, 0, 2 * Math.PI); ctx.fillStyle = '#475569'; ctx.fill();
+
+      // 4) Realistic Curved Anterior Flex Sensor Strip across Patella
+      const midTX = (hipX + kX) / 2, midTY = (hipY + kY) / 2;
+      const midSX = (kX + aX) / 2, midSY = (kY + aY) / 2;
+      const flexAnchorTX = midTX + 14 * Math.cos(tRad), flexAnchorTY = midTY - 14 * Math.sin(tRad);
+      const flexAnchorSX = midSX + 9 * Math.cos(sRad), flexAnchorSY = midSY - 9 * Math.sin(sRad);
+      const flexCtrlX = kX + (20 + Math.min(1.2, flexNorm) * 10) * Math.cos(midRad);
+      const flexCtrlY = kY - (20 + Math.min(1.2, flexNorm) * 10) * Math.sin(midRad);
+      ctx.strokeStyle = flexCol;
+      ctx.lineWidth = 3.5;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(flexAnchorTX, flexAnchorTY);
+      ctx.quadraticCurveTo(flexCtrlX, flexCtrlY, flexAnchorSX, flexAnchorSY);
+      ctx.stroke();
+
+      // 5) Live Bending Angles & Protractor Overlay
+      // 5a. Hip Plumb Reference & Thigh Tilt Angle
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = 'rgba(100,116,139,0.55)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(hipX, hipY + 72); ctx.stroke();
+      ctx.setLineDash([]);
+      const aVert = Math.PI / 2;
+      const aThigh = Math.PI / 2 - tRad;
+      if (Math.abs(thighPitch) >= 1.5) {
+        ctx.strokeStyle = '#0d9488';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(hipX, hipY, 34, Math.min(aVert, aThigh), Math.max(aVert, aThigh));
+        ctx.stroke();
+      }
+      ctx.fillStyle = '#0f766e';
+      ctx.font = 'bold 10px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(`Thigh ${thighPitch >= 0 ? '+' : ''}${thighPitch.toFixed(1)}°`, hipX + 36, hipY + 14);
+      ctx.restore();
+
+      // 5b. Knee Bending Goniometer Protractor (0° straight extension ray -> live shin axis)
+      ctx.save();
+      const extLen = 82;
+      const extX = kX + extLen * Math.sin(tRad);
+      const extY = kY + extLen * Math.cos(tRad);
+      ctx.setLineDash([4, 3]);
+      ctx.strokeStyle = '#0d9488';
+      ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(kX, kY); ctx.lineTo(extX, extY); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#0f766e';
+      ctx.font = 'bold 9px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('0° Line', extX + 4, extY + 4);
+
+      // Degree tick marks along knee protractor (0°, 30°, 60°, 90°, 120°)
+      const protR = 46;
+      ctx.strokeStyle = 'rgba(100,116,139,0.45)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(kX, kY, protR, aThigh - (15 * Math.PI) / 180, aThigh + (130 * Math.PI) / 180);
+      ctx.stroke();
+      [0, 30, 60, 90, 120].forEach(deg => {
+        const tickAng = aThigh + (deg * Math.PI) / 180;
+        const x1 = kX + (protR - 3) * Math.cos(tickAng), y1 = kY + (protR - 3) * Math.sin(tickAng);
+        const x2 = kX + (protR + 4) * Math.cos(tickAng), y2 = kY + (protR + 4) * Math.sin(tickAng);
+        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      });
+
+      // Filled live bending angle sector from 0° thigh extension to shin ray
+      const aShin = Math.PI / 2 - sRad;
+      if (Math.abs(flexion) >= 1.0) {
+        ctx.beginPath();
+        ctx.moveTo(kX, kY);
+        ctx.arc(kX, kY, 38, Math.min(aThigh, aShin), Math.max(aThigh, aShin));
+        ctx.closePath();
+        ctx.fillStyle = romOk ? 'rgba(37, 99, 235, 0.16)' : 'rgba(225, 29, 72, 0.22)';
+        ctx.fill();
+
+        ctx.strokeStyle = romOk ? '#2563eb' : '#e11d48';
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.arc(kX, kY, 38, Math.min(aThigh, aShin), Math.max(aThigh, aShin));
+        ctx.stroke();
+      }
+
+      // Bending Angle Callout Pill (shows Flexion Bend + Interior Included Angle + Flex Sensor Angle)
+      const calloutX = Math.min(w - 135, Math.max(kX + 26, kX + 42));
+      let calloutY = Math.max(54, Math.min(h - 90, kY - 26));
+      if (calloutX + 126 > w - 120 && calloutY < 108) calloutY = 112;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+      ctx.strokeStyle = romOk ? '#0d9488' : '#e11d48';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.roundRect(calloutX, calloutY, 126, 50, 9);
+      ctx.fill(); ctx.stroke();
+      ctx.textAlign = 'left';
+      ctx.fillStyle = romOk ? '#0f766e' : '#be123c';
+      ctx.font = 'bold 13px sans-serif';
+      ctx.fillText(`Bend: ${flexion.toFixed(1)}°`, calloutX + 9, calloutY + 17);
+      ctx.fillStyle = '#475569';
+      ctx.font = '10px sans-serif';
+      ctx.fillText(`Interior: ${(180 - flexion).toFixed(0)}° · Flex: ${flexEstDeg.toFixed(0)}°`, calloutX + 9, calloutY + 32);
+      ctx.fillStyle = '#2563eb';
+      ctx.fillText(`Shin Tilt: ${shinPitch >= 0 ? '+' : ''}${shinPitch.toFixed(1)}°`, calloutX + 9, calloutY + 44);
+      ctx.restore();
+
+      // 6) Sensor Chips Drawn on Straps
+      const drawChip = (x, y, label, col, gyro) => {
+        ctx.save();
+        ctx.fillStyle = '#ffffff'; ctx.strokeStyle = col; ctx.lineWidth = 1.8;
+        ctx.beginPath(); ctx.roundRect(x - 21, y - 9, 42, 18, 5); ctx.fill(); ctx.stroke();
+        ctx.fillStyle = col; ctx.font = 'bold 8.5px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(label, x, y);
+        if (Math.abs(gyro) > 8) {
+          ctx.beginPath(); ctx.arc(x + 17, y - 6, 2.5, 0, 2 * Math.PI); ctx.fillStyle = '#f59e0b'; ctx.fill();
+        }
+        ctx.restore();
+      };
+      drawChip(midTX - 34 * Math.cos(tRad), midTY + 34 * Math.sin(tRad), 'IMU 1', imuThighCol, thigh.gx ?? 0);
+      drawChip(midSX - 32 * Math.cos(sRad), midSY + 32 * Math.sin(sRad), 'IMU 2', imuShinCol, shin.gx ?? 0);
+
+      // 7) Articulated Anatomical Foot + Plantar FSR Ground Reaction Vectors
+      const totFsr = heel + fore;
+      // Blend foot tilt between flat stance (when loaded) and natural ankle trailing angle during swing
+      const naturalSwingTilt = sRad * 0.45;
+      const weightShiftTilt = totFsr > 300 ? ((heel - fore) / totFsr) * 0.22 : naturalSwingTilt;
+      const footTilt = totFsr > 300 ? weightShiftTilt * 0.5 : naturalSwingTilt;
+
+      ctx.save();
+      ctx.translate(aX, aY);
+      ctx.rotate(-footTilt);
+      const footGrad = ctx.createLinearGradient(0, -4, 0, 18);
+      footGrad.addColorStop(0, '#f8fafc');
+      footGrad.addColorStop(1, '#cbd5e1');
+      ctx.fillStyle = footGrad;
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1.7;
+      ctx.beginPath();
+      ctx.moveTo(-10, -2);
+      ctx.quadraticCurveTo(-24, 2, -23, 14);
+      ctx.quadraticCurveTo(-18, 18, -4, 17);
+      ctx.quadraticCurveTo(18, 15, 44, 17);
+      ctx.quadraticCurveTo(56, 17, 56, 10);
+      ctx.quadraticCurveTo(54, 4, 34, 2);
+      ctx.lineTo(8, -3);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.restore();
+
+      const cosF = Math.cos(-footTilt), sinF = Math.sin(-footTilt);
+      const toWorld = (lx, ly) => [aX + lx * cosF - ly * sinF, aY + lx * sinF + ly * cosF];
+      const [heelWX, heelWY] = toWorld(-14, 15);
+      const [foreWX, foreWY] = toWorld(40, 15);
+
+      const drawGRF = (fx, fy, raw, col, lbl) => {
+        const norm = Math.min(1, raw / 3600), ah = 8 + norm * 30;
+        ctx.fillStyle = col;
+        ctx.beginPath(); ctx.arc(fx, fy, 4 + norm * 3.5, 0, 2 * Math.PI); ctx.fill();
+        if (raw > 80) {
+          ctx.strokeStyle = col; ctx.lineWidth = 2.4;
+          ctx.beginPath(); ctx.moveTo(fx, fy + ah + 2); ctx.lineTo(fx, fy + 5); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(fx - 4, fy + 10); ctx.lineTo(fx, fy + 4); ctx.lineTo(fx + 4, fy + 10); ctx.stroke();
+        }
+        ctx.font = 'bold 9px sans-serif'; ctx.fillStyle = col; ctx.textAlign = 'center';
+        ctx.fillText(`${lbl} ${raw}`, fx, fy + ah + 13);
+      };
+      drawGRF(heelWX, heelWY, heel, sh.fsr_heel?.status === 'warn' ? '#d97706' : '#2563eb', 'HEEL');
+      drawGRF(foreWX, foreWY, fore, sh.fsr_fore?.status === 'warn' ? '#d97706' : '#7c3aed', 'FORE');
+
+      if (totFsr > 100) {
+        const r = fore / totFsr;
+        const copX = heelWX + r * (foreWX - heelWX);
+        const copY = heelWY + r * (foreWY - heelWY);
+        ctx.beginPath(); ctx.arc(copX, copY, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = '#f59e0b'; ctx.fill(); ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.5; ctx.stroke();
+      }
+
+      // 8) Top-Left Anatomical HUD Tag + Top-Right Frontal Varus/Valgus Mini Alignment View
+      ctx.save();
+      ctx.fillStyle = 'rgba(255,255,255,0.9)';
+      ctx.strokeStyle = '#dce6e3';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.roundRect(14, 12, 146, 26, 8); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#0f766e';
+      ctx.font = 'bold 10.5px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(`${activeLeg.toUpperCase()} LEG · ${d?.calibrated ? 'Calibrated' : 'Raw'}`, 24, 25);
+
+      // Frontal View (Varus/Valgus knee alignment vs ±6.5° wobble limit)
+      const fx = w - 70, fy = 58;
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.strokeStyle = Math.abs(netRoll) > 6.5 ? '#e11d48' : '#cbd5e1';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.roundRect(fx - 46, fy - 42, 92, 86, 10); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = '#64748b'; ctx.font = 'bold 8.5px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('VARUS / VALGUS', fx, fy - 30);
+
+      const bowX = fx + (netRoll / 25) * 18;
+      const fCol = Math.abs(netRoll) > 6.5 ? '#e11d48' : '#10b981';
+      ctx.strokeStyle = fCol; ctx.lineWidth = 3; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(fx, fy - 18); ctx.lineTo(bowX, fy + 4); ctx.lineTo(fx, fy + 24); ctx.stroke();
+      ctx.beginPath(); ctx.arc(bowX, fy + 4, 4, 0, 2 * Math.PI); ctx.fillStyle = fCol; ctx.fill();
+      ctx.fillStyle = '#1e2d2f'; ctx.font = 'bold 10px monospace';
+      ctx.fillText(`${netRoll >= 0 ? '+' : ''}${netRoll.toFixed(1)}°`, fx, fy + 35);
+      ctx.restore();
+    }
+
+    // ==================== Guided Exercises ====================
+    async function loadExerciseCatalog(langOverride) {
+      if (!BACKEND_MODE) return;
+      const lang = langOverride || currentLang;
+      const prevKey = document.getElementById('exerciseSelect').value;
+      exerciseCatalog = await api(`/api/exercises/catalog?lang=${encodeURIComponent(lang)}`);
+      const sel = document.getElementById('exerciseSelect');
+      sel.innerHTML = exerciseCatalog
+        .map(ex => `<option value="${esc(ex.key)}">${esc(ex.name)} (${ex.target_reps} reps)</option>`).join('');
+      if (prevKey && exerciseCatalog.some(e => e.key === prevKey)) sel.value = prevKey;
+      onExerciseSelectChange();
+      await loadExerciseTrials();
+    }
+
+    function onExerciseSelectChange() {
+      const key = document.getElementById('exerciseSelect').value;
+      const spec = exerciseCatalog.find(e => e.key === key);
+      if (!spec || (activeExerciseState && activeExerciseState.active)) return;
+      document.getElementById('exTitle').textContent = `${spec.name} · ${spec.category}`;
+      document.getElementById('exReps').textContent = `Reps: 0 / ${spec.target_reps}`;
+      document.getElementById('exCue').textContent = spec.instructions;
+    }
+
+    async function startExercise(autoSimulate) {
+      if (!BACKEND_MODE) { showToast('Exercises require the FastAPI backend.', 'warn'); return; }
+      const res = await api('/api/exercises/start', {
+        method: 'POST',
+        body: JSON.stringify({
+          exercise_key: document.getElementById('exerciseSelect').value,
+          patient_id: currentPatientId,
+          monitored_leg: activeLeg,
+          lang: currentLang,
+          auto_simulate: autoSimulate,
+        }),
+      });
+      updateExerciseUI(res.snapshot);
+      speakCue(res.snapshot?.live_cue || res.trial.exercise_name, true);
+      showToast(`Started ${res.trial.exercise_name} (${activeLeg} leg)`, 'ok');
+    }
+
+    async function stopExercise() {
+      if (!BACKEND_MODE) return;
+      const completed = await api('/api/exercises/stop', { method: 'POST' });
+      updateExerciseUI(null);
+      showToast(`Trial #${completed.id}: ${completed.finding} (${completed.quality_score}%)`, 'ok');
+      await loadExerciseTrials();
+    }
+
+    function updateExerciseUI(ex) {
+      activeExerciseState = ex && ex.active ? ex : null;
+      const badge = document.getElementById('exStatusBadge');
+      const btnStop = document.getElementById('btnStopEx'), btnSim = document.getElementById('btnStartExSim'), btnLive = document.getElementById('btnStartExLive');
+      if (!activeExerciseState) {
+        badge.className = 'tier-badge tier-Pending'; badge.textContent = 'Idle';
+        btnStop.disabled = true; btnSim.disabled = false; btnLive.disabled = false;
+        document.getElementById('exProgressFill').style.width = '0%';
+        return;
+      }
+      btnStop.disabled = false; btnSim.disabled = true; btnLive.disabled = true;
+      badge.className = `tier-badge ${ex.finding === 'High Risk Marker' ? 'tier-High' : ex.finding === 'Mild Deficit' ? 'tier-Moderate' : ex.finding === 'Normal' ? 'tier-Low' : 'tier-Pending'}`;
+      badge.textContent = ex.finding_label || ex.finding || 'Active';
+      const legTag = ex.monitored_leg ? ` (${ex.monitored_leg})` : '';
+      document.getElementById('exTitle').textContent = `${ex.exercise_name}${legTag}`;
+      document.getElementById('exReps').textContent = `Reps: ${ex.completed_reps} / ${ex.target_reps}`;
+      document.getElementById('exCue').textContent = ex.live_cue || '';
+      speakCue(ex.live_cue || '');
+      document.getElementById('exProgressFill').style.width = `${ex.progress_pct || 0}%`;
+      document.getElementById('exQuality').textContent = `${(ex.quality_score ?? 100).toFixed(0)}%`;
+      document.getElementById('exRom').textContent = `${(ex.avg_rom_deg ?? 0).toFixed(1)}°`;
+      document.getElementById('exWobble').textContent = `${(ex.roll_wobble_deg ?? 0).toFixed(1)}°`;
+      document.getElementById('exFlexMatch').textContent = `${(ex.flex_agreement_pct ?? 100).toFixed(0)}%`;
+    }
+
+    async function loadExerciseTrials() {
+      if (!BACKEND_MODE) return;
+      const trials = await api('/api/exercises/trials');
+      const el = document.getElementById('exerciseTrialsList');
+      el.innerHTML = !trials.length
+        ? '<div style="text-align:center;color:var(--text-muted);padding:18px;font-size:12px">No completed exercise trials saved yet.</div>'
+        : trials.slice(0, 15).map(t => `
+      <div class="list-row">
+        <div>
+          <strong>${esc(t.exercise_name)}</strong>
+          <span class="tier-badge tier-Pending" style="margin-left:6px">${esc(t.monitored_leg || 'Left')}</span>
+          <span style="color:var(--text-muted);margin-left:8px">Reps ${t.completed_reps}/${t.target_reps} · ROM ${t.avg_rom_deg ?? '--'}° · Wobble ${t.roll_wobble_deg ?? '--'}° · Score ${t.quality_score ?? '--'}%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="tier-badge ${t.finding === 'High Risk Marker' ? 'tier-High' : t.finding === 'Mild Deficit' ? 'tier-Moderate' : 'tier-Low'}">${esc(t.finding || t.status)}</span>
+          <button class="btn btn-rose btn-sm" onclick="deleteExerciseTrial(${t.id})">Del</button>
+        </div>
+      </div>`).join('');
+    }
+
+    async function deleteExerciseTrial(id) {
+      await api(`/api/exercises/trials/${id}`, { method: 'DELETE' });
+      await loadExerciseTrials();
+    }
+
+    // ==================== Leg, Language, Voice, Sensor Health & Analytics ====================
+    function syncLegButtons(leg) {
+      activeLeg = leg === 'Right' ? 'Right' : 'Left';
+      document.getElementById('btnLegLeft').classList.toggle('active', activeLeg === 'Left');
+      document.getElementById('btnLegRight').classList.toggle('active', activeLeg === 'Right');
+      drawFullLegSimulation(latestTelemetryFrame);
+      if (latestTelemetryFrame) {
+        const d = latestTelemetryFrame;
+        const b = d.biomechanics || {};
+        updateFootPressureMeter(b.footPressure || null, d.fsrHeel ?? 0, d.fsrFore ?? 0, b.heelPct ?? 50, b.forePct ?? 50, d.fsrImbalance ?? 0);
+      } else {
+        drawFootPressureHeatmap(0, 0, null);
+      }
+    }
+
+    // ==================== Joint Angle & Foot Pressure Simulator / Meter ====================
+    function renderStimPresets(presets) {
+      stimPresets = Array.isArray(presets) ? presets : [];
+      const row = document.getElementById('stimPresetRow');
+      row.innerHTML = stimPresets.map(p =>
+        `<button type="button" class="preset-pill" onclick="selectStimPreset('${esc(p.key)}')">${esc(p.label)}</button>`
+      ).join('');
+    }
+
+    function selectStimPreset(key) {
+      const p = stimPresets.find(x => x.key === key);
+      if (!p) return;
+      document.getElementById('stimAngle').value = String(p.knee_angle_deg);
+      document.getElementById('stimHeel').value = String(p.heel_fsr);
+      document.getElementById('stimFore').value = String(p.fore_fsr);
+      document.getElementById('stimThighPitch').value = String(p.thigh_pitch_deg);
+      document.getElementById('stimRoll').value = String(p.net_roll_deg);
+      onStimInput(true, p.flex_stiffness ?? null);
+    }
+
+    function onStimInput(immediate = false, flexStiff = null) {
+      const angle = parseFloat(document.getElementById('stimAngle').value || '0');
+      const heel = parseInt(document.getElementById('stimHeel').value || '0', 10);
+      const fore = parseInt(document.getElementById('stimFore').value || '0', 10);
+      const thighP = parseFloat(document.getElementById('stimThighPitch').value || '0');
+      const roll = parseFloat(document.getElementById('stimRoll').value || '0');
+
+      document.getElementById('stimAngleVal').textContent = `${angle.toFixed(0)}°`;
+      document.getElementById('stimHeelVal').textContent = String(heel);
+      document.getElementById('stimForeVal').textContent = String(fore);
+      document.getElementById('stimThighVal').textContent = `${thighP >= 0 ? '+' : ''}${thighP.toFixed(0)}°`;
+      document.getElementById('stimRollVal').textContent = `${roll >= 0 ? '+' : ''}${roll.toFixed(1)}°`;
+
+      drawJointAngleGauge(angle, Math.max(0, Math.min(1.2, angle / 90)));
+      drawFootPressureHeatmap(heel, fore, null);
+
+      if (immediate) {
+        if (stimDebounceTimer) clearTimeout(stimDebounceTimer);
+        applyStimulation(1, flexStiff);
+      } else {
+        if (stimDebounceTimer) clearTimeout(stimDebounceTimer);
+        stimDebounceTimer = setTimeout(() => applyStimulation(1, null), 95);
+      }
+    }
+
+    async function applyStimulation(repeat = 1, flexStiff = null) {
+      if (!BACKEND_MODE) { showToast('Stimulator requires the FastAPI backend.', 'warn'); return; }
+      const payload = {
+        knee_angle_deg: parseFloat(document.getElementById('stimAngle').value || '30'),
+        heel_fsr: parseInt(document.getElementById('stimHeel').value || '1650', 10),
+        fore_fsr: parseInt(document.getElementById('stimFore').value || '1600', 10),
+        thigh_pitch_deg: parseFloat(document.getElementById('stimThighPitch').value || '10'),
+        net_roll_deg: parseFloat(document.getElementById('stimRoll').value || '1.5'),
+        flex_stiffness: flexStiff,
+        repeat,
+      };
+      const res = await api('/api/biomechanics/stimulate', { method: 'POST', body: JSON.stringify(payload) });
+      if (repeat > 1 && res.aiRisk) {
+        showToast(`Evaluated ${repeat} frames → AI Risk: ${res.aiRisk.ready ? res.aiRisk.oa_risk_score.toFixed(1) + ' (' + res.aiRisk.oa_risk_tier + ')' : 'Warming up'}`, 'ok');
+      }
+    }
+
+    function drawJointAngleGauge(angleDeg, flexNorm) {
+      const canvas = document.getElementById('jointAngleCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const cx = w * 0.5, cy = h * 0.62, r = 64;
+      const mapA = (deg) => (180 + ((deg + 20) / 180) * 180) * Math.PI / 180;
+
+      // Zone arcs (-20..-10 hyperext red | -10..135 safe teal | 135..160 hyperflex red)
+      const kMin = currentThresholds.knee_angle_min ?? -10;
+      const kMax = currentThresholds.knee_angle_max ?? 135;
+      ctx.lineWidth = 11; ctx.lineCap = 'round';
+      ctx.strokeStyle = '#fecdd3';
+      ctx.beginPath(); ctx.arc(cx, cy, r, mapA(-20), mapA(kMin)); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, r, mapA(kMax), mapA(160)); ctx.stroke();
+      ctx.strokeStyle = '#99f6e4';
+      ctx.beginPath(); ctx.arc(cx, cy, r, mapA(kMin), mapA(kMax)); ctx.stroke();
+
+      // Ticks (-10°, 0°, 45°, 90°, 135°)
+      ctx.fillStyle = '#64748b'; ctx.font = 'bold 8.5px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      [-10, 0, 45, 90, 135].forEach(t => {
+        const a = mapA(t);
+        ctx.fillText(`${t}°`, cx + (r + 14) * Math.cos(a), cy + (r + 14) * Math.sin(a));
+      });
+
+      // Live Angle Pointer & Hinge Visual
+      const clamped = Math.max(-20, Math.min(160, angleDeg));
+      const ok = angleDeg >= kMin && angleDeg <= kMax;
+      const ptrA = mapA(clamped);
+      ctx.strokeStyle = ok ? '#0d9488' : '#e11d48';
+      ctx.lineWidth = 3.2;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + (r - 6) * Math.cos(ptrA), cy + (r - 6) * Math.sin(ptrA)); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, 5.5, 0, 2 * Math.PI); ctx.fillStyle = ok ? '#0d9488' : '#e11d48'; ctx.fill();
+
+      // Value & badge
+      ctx.fillStyle = '#1e2d2f'; ctx.font = 'bold 17px sans-serif';
+      ctx.fillText(`${angleDeg.toFixed(1)}°`, cx, cy + 28);
+      ctx.fillStyle = '#64748b'; ctx.font = '10px sans-serif';
+      ctx.fillText(`Flex ${(flexNorm * 90).toFixed(0)}° (${Math.round(flexNorm * 100)}%)`, cx, cy + 44);
+
+      const badge = document.getElementById('stimAngleBadge');
+      if (badge) {
+        badge.className = `tier-badge ${ok ? 'tier-Low' : 'tier-High'}`;
+        badge.textContent = angleDeg < kMin ? 'Hyper-Extension' : angleDeg > kMax ? 'Hyper-Flexion' : 'Safe ROM';
+      }
+    }
+
+    function drawFootPressureHeatmap(heel, fore, fp) {
+      const canvas = document.getElementById('footPressureCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const cx = w * 0.5;
+      const mirror = activeLeg === 'Left' ? 1 : -1;
+
+      ctx.save();
+      ctx.translate(cx, h * 0.5);
+      ctx.scale(mirror, 1);
+
+      // Anatomical plantar foot silhouette
+      ctx.fillStyle = '#f8fafc';
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(-26, 70);
+      ctx.bezierCurveTo(-30, 96, 26, 98, 25, 70); // heel cup
+      ctx.bezierCurveTo(22, 36, 16, 8, 28, -28);  // lateral arch
+      ctx.bezierCurveTo(36, -64, 24, -98, -6, -98); // hallux / big toe
+      ctx.bezierCurveTo(-34, -96, -40, -54, -32, -26); // medial metatarsal
+      ctx.bezierCurveTo(-24, 6, -24, 38, -26, 70);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+
+      const drawBlob = (bx, by, rad, val, rgb) => {
+        const intensity = Math.min(1, Math.max(0.08, val / 3600));
+        const r = rad * (0.7 + intensity * 0.45);
+        const g = ctx.createRadialGradient(bx, by, 3, bx, by, r);
+        g.addColorStop(0, `rgba(${rgb}, ${0.25 + intensity * 0.65})`);
+        g.addColorStop(0.6, `rgba(${rgb}, ${0.10 + intensity * 0.30})`);
+        g.addColorStop(1, `rgba(${rgb}, 0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(bx, by, r, 0, 2 * Math.PI); ctx.fill();
+      };
+
+      drawBlob(-3, -46, 38, fore, fore > 2600 ? '225, 29, 72' : '124, 58, 237');
+      drawBlob(-1, 66, 34, heel, heel > 2600 ? '225, 29, 72' : '37, 99, 235');
+
+      // Center of Pressure dot moving between heel (y=+66) and forefoot (y=-46)
+      const total = heel + fore;
+      const cop = fp && fp.cop_ratio !== undefined ? fp.cop_ratio : (total > 100 ? fore / total : 0.5);
+      const copY = 66 - cop * 112;
+      ctx.beginPath(); ctx.arc(-2, copY, 6, 0, 2 * Math.PI);
+      ctx.fillStyle = '#f59e0b'; ctx.fill();
+      ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.restore();
+
+      ctx.fillStyle = '#475569'; ctx.font = 'bold 9.5px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(`${activeLeg.toUpperCase()} FOOT SOLE`, cx, 14);
+      ctx.fillStyle = '#7c3aed';
+      ctx.fillText(`FORE ${fore}`, cx, h - 222);
+      ctx.fillStyle = '#2563eb';
+      ctx.fillText(`HEEL ${heel}`, cx, h - 8);
+    }
+
+    function updateFootPressureMeter(fp, heelRaw, foreRaw, heelPctFallback, forePctFallback, imbFallback) {
+      const heelAdj = fp ? fp.heel_adj : heelRaw;
+      const foreAdj = fp ? fp.fore_adj : foreRaw;
+      const heelPct = fp ? fp.heel_pct : heelPctFallback;
+      const forePct = fp ? fp.fore_pct : forePctFallback;
+      const imb = fp ? fp.imbalance_pct : imbFallback;
+      const loadPct = fp ? fp.total_load_pct : Math.min(100, Math.round((heelRaw + foreRaw) / 64));
+      const deg = fp ? fp.meter_needle_deg : ((heelRaw + foreRaw > 100) ? ((foreRaw / (heelRaw + foreRaw) - 0.5) * 180) : 0);
+      const zone = fp ? fp.dominant_zone : (heelRaw + foreRaw <= 100 ? 'Unloaded' : imb > 60 ? (heelRaw > foreRaw ? 'Heel Overload' : 'Forefoot Overload') : 'Balanced');
+      const lvl = fp ? fp.status_level : (imb > 60 ? 'fault' : imb > 30 ? 'warn' : 'ok');
+
+      drawFootPressureHeatmap(heelAdj, foreAdj, fp);
+
+      const needle = document.getElementById('fpMeterNeedle');
+      if (needle) needle.style.transform = `rotate(${Math.max(-90, Math.min(90, deg)).toFixed(1)}deg)`;
+      document.getElementById('fpImbalanceVal').textContent = `${imb.toFixed(1)}%`;
+      document.getElementById('fpTotalLoad').textContent = `Imbalance · Total Load ${loadPct}%`;
+      document.getElementById('fpHeelText').textContent = `${heelAdj} · ${heelPct}%`;
+      document.getElementById('fpForeText').textContent = `${foreAdj} · ${forePct}%`;
+      document.getElementById('fpHeelBar').style.width = `${Math.min(100, Math.round((heelAdj / 4095) * 100))}%`;
+      document.getElementById('fpForeBar').style.width = `${Math.min(100, Math.round((foreAdj / 4095) * 100))}%`;
+
+      const badge = document.getElementById('fpZoneBadge');
+      badge.className = `tier-badge ${lvl === 'fault' ? 'tier-High' : lvl === 'warn' ? 'tier-Moderate' : 'tier-Low'}`;
+      badge.textContent = zone;
+    }
+
+    async function setActiveLeg(leg) {
+      syncLegButtons(leg);
+      if (!BACKEND_MODE) return;
+      await api('/api/device/leg', { method: 'POST', body: JSON.stringify({ leg: activeLeg }) });
+      showToast(`Monitored leg set to ${activeLeg}`, 'ok');
+    }
+
+    function syncLangButtons(lang) {
+      currentLang = lang === 'hi' ? 'hi' : 'en';
+      document.getElementById('btnLangEn').classList.toggle('active', currentLang === 'en');
+      document.getElementById('btnLangHi').classList.toggle('active', currentLang === 'hi');
+    }
+
+    async function setLanguage(lang) {
+      const prev = currentLang;
+      syncLangButtons(lang);
+      if (!BACKEND_MODE) return;
+      const res = await api('/api/exercises/language', { method: 'POST', body: JSON.stringify({ lang: currentLang }) });
+      if (res.catalog) {
+        const sel = document.getElementById('exerciseSelect');
+        const keepKey = sel.value;
+        exerciseCatalog = res.catalog;
+        sel.innerHTML = exerciseCatalog
+          .map(ex => `<option value="${esc(ex.key)}">${esc(ex.name)} (${ex.target_reps} reps)</option>`).join('');
+        if (keepKey && exerciseCatalog.some(e => e.key === keepKey)) sel.value = keepKey;
+        onExerciseSelectChange();
+      }
+      if (prev !== currentLang) showToast(currentLang === 'hi' ? 'भाषा: हिन्दी' : 'Language: English', 'ok');
+    }
+
+    function toggleVoiceCoaching() {
+      voiceEnabled = !voiceEnabled;
+      const btn = document.getElementById('btnVoiceToggle');
+      btn.textContent = voiceEnabled ? ' Voice On' : ' Voice';
+      btn.className = voiceEnabled ? 'btn btn-teal btn-sm' : 'btn btn-soft btn-sm';
+      if (!voiceEnabled && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        return;
+      }
+      if (voiceEnabled) {
+        const cue = document.getElementById('exCue').textContent;
+        speakCue(cue, true);
+      }
+    }
+
+    function speakCue(text, force = false) {
+      if (!voiceEnabled || !text || !('speechSynthesis' in window)) return;
+      const normalized = text.replace(/\d+°/g, '').trim();
+      const now = Date.now();
+      const isMilestone = /(complete|Target reached|दोहराव पूरा|लक्ष्य पूरा)/i.test(text);
+      if (!force && !isMilestone && (normalized === lastSpokenCue || now - lastSpeakAt < 3500)) return;
+      if (text === lastSpokenCue && !force) return;
+      lastSpokenCue = isMilestone ? text : normalized;
+      lastSpeakAt = now;
+      try {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = currentLang === 'hi' ? 'hi-IN' : 'en-IN';
+        utter.rate = 0.98;
+        window.speechSynthesis.speak(utter);
+      } catch (e) {
+        console.warn('Voice synthesis unavailable:', e);
+      }
+    }
+
+    function updateSensorHealth(health) {
+      if (!health || !health.sensors) return;
+      latestSensorHealth = health;
+      const map = [
+        ['imu_thigh', 'pillThigh', 'dotThigh'],
+        ['imu_shin', 'pillShin', 'dotShin'],
+        ['flex', 'pillFlex', 'dotFlex'],
+        ['fsr_heel', 'pillHeel', 'dotHeel'],
+        ['fsr_fore', 'pillFore', 'dotFore'],
+      ];
+      map.forEach(([key, pillId, dotId]) => {
+        const st = health.sensors[key]?.status || 'ok';
+        const pill = document.getElementById(pillId);
+        const dot = document.getElementById(dotId);
+        if (pill) {
+          pill.classList.remove('warn', 'fault');
+          if (st !== 'ok') pill.classList.add(st);
+        }
+        if (dot) {
+          dot.className = `sensor-dot ${st}`;
+        }
+      });
+      const banner = document.getElementById('sensorFaultBanner');
+      const textEl = document.getElementById('sensorFaultText');
+      if (health.all_ok) {
+        banner.style.display = 'none';
+      } else {
+        banner.style.display = 'flex';
+        banner.classList.toggle('fault', !health.imu_ready);
+        textEl.textContent = (health.issues || []).join(' · ') || 'Check sensor wiring';
+      }
+    }
+
+    function openPrintableReport() {
+      if (!BACKEND_MODE) { showToast('Reports require the FastAPI backend.', 'warn'); return; }
+      if (!currentPatientId) {
+        showToast('Select a registered patient first to open their printable report.', 'warn');
+        return;
+      }
+      window.open(`${API_BASE}/api/analytics/patients/${currentPatientId}/report/html`, '_blank', 'noopener');
+    }
+
+    function switchAnalyticsTab(tab) {
+      const tabs = [
+        ['progress', 'tabProgress', 'btnTabProgress'],
+        ['bilateral', 'tabBilateral', 'btnTabBilateral'],
+        ['ner', 'tabNer', 'btnTabNer'],
+      ];
+      tabs.forEach(([name, panelId, btnId]) => {
+        document.getElementById(panelId).style.display = name === tab ? 'block' : 'none';
+        document.getElementById(btnId).classList.toggle('active', name === tab);
+      });
+    }
+
+    async function openAnalyticsModal() {
+      if (!BACKEND_MODE) { showToast('Analytics require the FastAPI backend.', 'warn'); return; }
+      document.getElementById('analyticsModal').classList.add('active');
+      switchAnalyticsTab(currentPatientId ? 'progress' : 'ner');
+      try {
+        const reqs = [api('/api/analytics/ner-summary')];
+        if (currentPatientId) reqs.push(api(`/api/analytics/patients/${currentPatientId}`));
+        const [ner, patientData] = await Promise.all(reqs);
+        renderNerSummary(ner);
+        renderPatientAnalytics(patientData || null);
+      } catch (e) {
+        showToast(`Failed to load analytics: ${e.message}`, 'err');
+      }
+    }
+
+    function renderPatientAnalytics(data) {
+      if (!data) {
+        document.getElementById('anBmiVal').textContent = '--';
+        document.getElementById('anBmiCat').textContent = 'No patient selected';
+        document.getElementById('anLatestRisk').textContent = '--';
+        document.getElementById('anLatestTier').textContent = 'Pending';
+        document.getElementById('anTrendDir').textContent = '--';
+        document.getElementById('anVisitCount').textContent = '0 sessions';
+        document.getElementById('anBmiNote').textContent = 'Select a patient profile from the top dropdown to view BMI joint-load assessment, bilateral L/R comparison, and visit history.';
+        document.getElementById('anRecsBox').innerHTML = '';
+        if (analyticsChart) { analyticsChart.destroy(); analyticsChart = null; }
+        return;
+      }
+      const bmi = data.bmi_summary || {};
+      const trend = data.longitudinal_trend || { points: [] };
+      const bil = data.bilateral_comparison || {};
+
+      document.getElementById('anBmiVal').textContent = bmi.bmi !== null && bmi.bmi !== undefined ? String(bmi.bmi) : '--';
+      document.getElementById('anBmiCat').textContent = `${bmi.category || 'Unrecorded'} (Load: ${bmi.oa_load_modifier || '--'})`;
+      document.getElementById('anBmiNote').textContent = bmi.note || '';
+      document.getElementById('anLatestRisk').textContent = data.latest_oa_risk_score !== null && data.latest_oa_risk_score !== undefined ? `${data.latest_oa_risk_score}` : '--';
+      document.getElementById('anLatestTier').textContent = `${data.latest_oa_risk_tier || 'Pending'} Risk`;
+      document.getElementById('anTrendDir').textContent = trend.direction || '--';
+      document.getElementById('anVisitCount').textContent = `${trend.visit_count || 0} completed sessions`;
+
+      const recs = data.recommendations || [];
+      document.getElementById('anRecsBox').innerHTML = recs.length
+        ? `<strong>Clinical Recommendations:</strong><ul style="margin:4px 0 0 18px;color:var(--text-sub)">${recs.map(r => `<li>${esc(r)}</li>`).join('')}</ul>`
+        : '';
+
+      document.getElementById('anBilatSummary').textContent = bil.summary || '';
+      const left = bil.left || {}, right = bil.right || {};
+      document.getElementById('anLeftRom').textContent = left.avg_rom_deg != null ? `${left.avg_rom_deg}° ROM` : '--° ROM';
+      document.getElementById('anLeftMeta').textContent = `${left.session_count || 0} sessions · Avg Risk ${left.avg_risk_score ?? '--'}`;
+      document.getElementById('anRightRom').textContent = right.avg_rom_deg != null ? `${right.avg_rom_deg}° ROM` : '--° ROM';
+      document.getElementById('anRightMeta').textContent = `${right.session_count || 0} sessions · Avg Risk ${right.avg_risk_score ?? '--'}`;
+      document.getElementById('anRomDiff').textContent = bil.rom_asymmetry_deg != null ? `${bil.rom_asymmetry_deg}°` : '--°';
+      document.getElementById('anRiskDiff').textContent = bil.risk_score_diff != null ? `${bil.risk_score_diff} pts` : '-- pts';
+
+      if (typeof Chart !== 'undefined') {
+        if (analyticsChart) analyticsChart.destroy();
+        const pts = trend.points || [];
+        analyticsChart = new Chart(document.getElementById('chartTrend'), {
+          type: 'line',
+          data: {
+            labels: pts.map(p => `#${p.session_id} (${p.leg[0]})`),
+            datasets: [
+              { label: 'OA Risk Score', data: pts.map(p => p.oa_risk_score), borderColor: '#e11d48', backgroundColor: 'rgba(225,29,72,0.1)', yAxisID: 'yRisk', tension: 0.3, fill: true },
+              { label: 'Knee ROM (°)', data: pts.map(p => p.rom_deg), borderColor: '#0d9488', backgroundColor: 'transparent', yAxisID: 'yRom', tension: 0.3 },
+            ],
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+              yRisk: { type: 'linear', position: 'left', min: 0, max: 100, ticks: { font: { size: 10 } } },
+              yRom: { type: 'linear', position: 'right', min: 0, max: 140, grid: { drawOnChartArea: false }, ticks: { font: { size: 10 } } },
+            },
+          },
+        });
+      }
+    }
+
+    function renderNerSummary(ner) {
+      if (!ner) return;
+      document.getElementById('nerPatients').textContent = String(ner.total_patients || 0);
+      document.getElementById('nerSessions').textContent = String(ner.total_completed_sessions || 0);
+      document.getElementById('nerAvgRisk').textContent = ner.overall_avg_risk != null ? `${ner.overall_avg_risk}` : '--';
+      const rows = ner.districts || [];
+      document.getElementById('anNerTable').innerHTML = !rows.length
+        ? '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">No patient district records yet.</td></tr>'
+        : rows.map(r => `
+      <tr>
+        <td><strong>${esc(r.district)}</strong></td>
+        <td>${r.patient_count}</td>
+        <td>${r.session_count}</td>
+        <td>${r.avg_risk_score ?? '--'}</td>
+        <td>${r.avg_rom_deg != null ? `${r.avg_rom_deg}°` : '--'}</td>
+        <td>${r.tiers.Low || 0} / ${r.tiers.Moderate || 0} / ${r.tiers.High || 0}</td>
+      </tr>`).join('');
+    }
+
+    // ==================== Unified Chart ====================
+    function initCharts() {
+      if (typeof Chart === 'undefined') {
+        console.warn('Chart.js unavailable — live waveform disabled');
+        return;
+      }
+      unifiedChart = new Chart(document.getElementById('chartUnified'), {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [
+            { label: 'Knee Angle (°)', data: [], yAxisID: 'yAngle', borderColor: '#0d9488', backgroundColor: 'rgba(13,148,136,0.12)', fill: true, tension: 0.35, pointRadius: 0, borderWidth: 2.2 },
+            { label: 'Heel FSR', data: [], yAxisID: 'yFsr', borderColor: '#3b82f6', backgroundColor: 'transparent', tension: 0.35, pointRadius: 0, borderWidth: 1.6 },
+            { label: 'Forefoot FSR', data: [], yAxisID: 'yFsr', borderColor: '#8b5cf6', backgroundColor: 'transparent', tension: 0.35, pointRadius: 0, borderWidth: 1.6 },
+          ],
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, animation: { duration: 0 },
+          plugins: { legend: { labels: { color: '#4b6163', font: { size: 11 } }, position: 'top' } },
+          scales: {
+            x: { display: false },
+            yAngle: { type: 'linear', position: 'left', min: -15, max: 145, grid: { color: 'rgba(15,45,40,0.06)' }, ticks: { color: '#0d9488', font: { size: 10 } } },
+            yFsr: { type: 'linear', position: 'right', min: 0, max: 4095, grid: { drawOnChartArea: false }, ticks: { color: '#64748b', font: { size: 10 } } },
+          },
+        },
+      });
+    }
+
+    function updateCharts(kneeVal, d) {
+      if (!unifiedChart) return;
+      chartData.labels.push('');
+      chartData.knee.push(kneeVal);
+      chartData.heel.push(d.fsrHeel);
+      chartData.fore.push(d.fsrFore);
+      if (chartData.labels.length > MAX_CHART_POINTS) {
+        chartData.labels.shift(); chartData.knee.shift(); chartData.heel.shift(); chartData.fore.shift();
+      }
+      unifiedChart.data.labels = chartData.labels;
+      unifiedChart.data.datasets[0].data = chartData.knee;
+      unifiedChart.data.datasets[1].data = chartData.heel;
+      unifiedChart.data.datasets[2].data = chartData.fore;
+      unifiedChart.update('none');
+    }
+
+    // ==================== Timers & Export ====================
+    function startSessionTimer() {
+      if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+      sessionTimerInterval = setInterval(() => {
+        if (!sessionStart) return;
+        const e = Math.floor((Date.now() - sessionStart) / 1000);
+        document.getElementById('sessionTimer').textContent = `Rec #${activeSessionId} ${String(Math.floor(e / 60)).padStart(2, '0')}:${String(e % 60).padStart(2, '0')}`;
+      }, 1000);
+    }
+    function stopSessionTimer() { if (sessionTimerInterval) clearInterval(sessionTimerInterval); }
+    function startFPS() {
+      if (fpsInterval) clearInterval(fpsInterval);
+      lastFpsCount = msgCount;
+      fpsInterval = setInterval(() => {
+        document.getElementById('fpsDisplay').textContent = `${msgCount - lastFpsCount} Hz`;
+        lastFpsCount = msgCount;
+      }, 1000);
+    }
+
+    async function clearLiveBuffer() {
+      await api('/api/telemetry/clear', { method: 'POST' });
+      showToast('Live telemetry buffer cleared', 'ok');
+    }
+    function exportCurrentCSV() {
+      window.location.href = `${API_BASE}/api/telemetry/export/csv`;
+    }
+    function exportCurrentJSON() {
+      window.location.href = `${API_BASE}/api/telemetry/export/json`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'd' && e.ctrlKey) { e.preventDefault(); toggleSimulator(); }
+    });
+
+    window.addEventListener('load', async () => {
+      initCharts();
+      drawFullLegSimulation(null);
+      drawJointAngleGauge(30, 0.33);
+      updateFootPressureMeter(null, 0, 0, 50, 50, 0);
+      updateCalibrationUI(false, null, 0);
+      document.getElementById('btnExportTrialsCsv').href = `${API_BASE}/api/exercises/trials/export/csv`;
+
+      try {
+        const boot = await api('/api/dashboard/bootstrap');
+        renderStimPresets(boot.stimulation_presets || []);
+        if (boot.foot_pressure) {
+          updateFootPressureMeter(boot.foot_pressure, boot.foot_pressure.heel_adj, boot.foot_pressure.fore_adj, boot.foot_pressure.heel_pct, boot.foot_pressure.fore_pct, boot.foot_pressure.imbalance_pct);
+        }
+        allPatients = boot.patients || [];
+        const sel = document.getElementById('patientSelect');
+        sel.innerHTML = '<option value="">— Walk-in Patient —</option>';
+        allPatients.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = String(p.id);
+          opt.textContent = `${p.name} (${p.age || '?'}y, ${p.monitored_leg})${p.active_calibration ? ' ' : ''}`;
+          sel.appendChild(opt);
+        });
+
+        exerciseCatalog = boot.exercises || [];
+        document.getElementById('exerciseSelect').innerHTML = exerciseCatalog
+          .map(ex => `<option value="${esc(ex.key)}">${esc(ex.name)} (${ex.target_reps} reps)</option>`).join('');
+        onExerciseSelectChange();
+        await loadExerciseTrials();
+
+        handleDeviceStatus(boot.status);
+        (boot.recent_alerts || []).slice().reverse().forEach(a => addAlert(a.severity, a.message, a.created_at));
+        if (Array.isArray(boot.live_frames) && boot.live_frames.length) {
+          applyHistoryFrames(boot.live_frames);
+        }
+      } catch (e) {
+        console.warn('Bootstrap failed:', e);
+        showToast('Backend not reachable at ' + (API_BASE || location.origin) + ' — run ./run_backend.sh', 'warn');
+      }
+      connectWebSocket();
+    });
+  </script>
+</body>
+
+</html>
